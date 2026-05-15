@@ -3,311 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Foko Games – Macemu Games</title>
+  <title>FOKO Games</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    :root, [data-theme="light"] {
-      --bg: #f7f6f2;
-      --surface: #ffffff;
-      --border: rgba(0,0,0,0.09);
-      --text: #1a1a18;
-      --muted: #6b7280;
-      --faint: #b0b0a8;
-      --primary: #1a7a2e;
-      --primary-hover: #145f24;
-      --primary-highlight: rgba(26,122,46,0.08);
-      --shadow: 0 2px 12px rgba(0,0,0,0.07);
-      --radius: 0.75rem;
+    :root,[data-theme="light"]{--bg:#f7f6f2;--text:#1a1a18;--muted:#6b7280;--primary:#1a7a2e;--border:rgba(0,0,0,.08)}
+    [data-theme="dark"]{--bg:#111110;--text:#e4e4e0;--muted:#9ca3af;--primary:#4caf63;--border:rgba(255,255,255,.08)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{-webkit-font-smoothing:antialiased}
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      min-height:100dvh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:2rem;
     }
-    [data-theme="dark"] {
-      --bg: #111110;
-      --surface: #1b1b19;
-      --border: rgba(255,255,255,0.09);
-      --text: #e4e4e0;
-      --muted: #9ca3af;
-      --faint: #4a4a46;
-      --primary: #4caf63;
-      --primary-hover: #3d9950;
-      --primary-highlight: rgba(76,175,99,0.10);
-      --shadow: 0 2px 12px rgba(0,0,0,0.3);
+    .logo-wrap{display:flex;align-items:center;justify-content:center;gap:.75rem;margin-bottom:1.5rem}
+    .logo-text{font-size:1.75rem;font-weight:700;letter-spacing:-.03em}
+    .slogan{font-size:clamp(1.1rem,.8rem + 2vw,1.5rem);color:var(--muted);max-width:36ch;line-height:1.4}
+    .theme-btn{
+      position:fixed;top:1rem;right:1rem;
+      background:none;border:1px solid var(--border);
+      border-radius:.5rem;padding:.375rem .5rem;
+      cursor:pointer;color:var(--muted);display:flex;align-items:center
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    /* NAV */
-    nav {
-      padding: 1rem 1.5rem;
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.625rem;
-      text-decoration: none;
-      color: var(--text);
-    }
-    .nav-logo svg { flex-shrink: 0; }
-    .nav-logo-text { font-size: 1rem; font-weight: 700; letter-spacing: -0.02em; }
-    .nav-logo-sub { font-size: 0.75rem; color: var(--muted); font-weight: 400; }
-    .nav-right { display: flex; align-items: center; gap: 0.75rem; }
-    .nav-link {
-      font-size: 0.875rem;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 180ms;
-    }
-    .nav-link:hover { color: var(--text); }
-    .theme-btn {
-      background: none;
-      border: 1px solid var(--border);
-      border-radius: 0.5rem;
-      padding: 0.375rem 0.5rem;
-      cursor: pointer;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      transition: color 180ms, border-color 180ms;
-    }
-    .theme-btn:hover { color: var(--text); }
-
-    /* HERO */
-    .hero {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 4rem 1.5rem 3rem;
-      text-align: center;
-    }
-    .hero-badge {
-      display: inline-block;
-      background: var(--primary-highlight);
-      color: var(--primary);
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      padding: 0.3rem 0.75rem;
-      border-radius: 9999px;
-      margin-bottom: 1.25rem;
-    }
-    .hero h1 {
-      font-size: clamp(2rem, 1.2rem + 3vw, 3.25rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      margin-bottom: 1rem;
-    }
-    .hero p {
-      font-size: 1.0625rem;
-      color: var(--muted);
-      max-width: 46ch;
-      margin: 0 auto 2rem;
-    }
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--primary);
-      color: #fff;
-      font-size: 0.9375rem;
-      font-weight: 500;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
-      text-decoration: none;
-      transition: background 180ms;
-    }
-    .hero-cta:hover { background: var(--primary-hover); }
-
-    /* APPS GRID */
-    .section {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem 4rem;
-      width: 100%;
-    }
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: var(--muted);
-      margin-bottom: 1.25rem;
-    }
-    .apps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(320px,100%), 1fr));
-      gap: 1rem;
-    }
-    .app-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: var(--text);
-      transition: box-shadow 200ms, transform 200ms;
-    }
-    .app-card:hover {
-      box-shadow: 0 6px 24px rgba(0,0,0,0.11);
-      transform: translateY(-2px);
-    }
-    .app-card-header {
-      display: flex;
-      align-items: center;
-      gap: 0.875rem;
-    }
-    .app-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 0.625rem;
-      background: var(--primary-highlight);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 1.5rem;
-    }
-    .app-name {
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-    .app-platform {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 0.125rem;
-    }
-    .app-desc {
-      font-size: 0.875rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-    .app-tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 0.2rem 0.5rem;
-      border-radius: 9999px;
-      background: var(--primary-highlight);
-      color: var(--primary);
-      align-self: flex-start;
-    }
-
-    /* ABOUT */
-    .about {
-      max-width: 580px;
-      margin: 0 auto;
-      padding: 0 1.5rem 4rem;
-      text-align: center;
-    }
-    .about h2 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.625rem;
-    }
-    .about p {
-      font-size: 0.9375rem;
-      color: var(--muted);
-    }
-    .about a { color: var(--primary); text-decoration: none; }
-    .about a:hover { text-decoration: underline; }
-
-    /* FOOTER */
-    footer {
-      margin-top: auto;
-      padding: 1.25rem 1.5rem;
-      border-top: 1px solid var(--border);
-      text-align: center;
-      font-size: 0.8125rem;
-      color: var(--faint);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--text); }
-
-    @media (max-width: 480px) {
-      .hero { padding: 2.5rem 1rem 2rem; }
-      .section, .about { padding-inline: 1rem; }
-      nav { padding: 0.875rem 1rem; }
-      .nav-logo-sub { display: none; }
-    }
+    footer{position:fixed;bottom:1rem;font-size:.75rem}
+    footer a{color:var(--muted);text-decoration:none}
+    footer a:hover{text-decoration:underline}
   </style>
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="#">
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-label="Foko Games logo">
-      <rect width="32" height="32" rx="8" fill="var(--primary)" opacity="0.15"/>
-      <!-- Controller shape -->
-      <rect x="6" y="11" width="20" height="12" rx="4" stroke="var(--primary)" stroke-width="2" fill="none"/>
-      <circle cx="20" cy="17" r="1.5" fill="var(--primary)"/>
-      <circle cx="23" cy="14.5" r="1.5" fill="var(--primary)"/>
-      <line x1="10" y1="17" x2="13" y2="17" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/>
-      <line x1="11.5" y1="15.5" x2="11.5" y2="18.5" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-    <div>
-      <div class="nav-logo-text">Foko Games</div>
-      <div class="nav-logo-sub">by Macemu Games</div>
-    </div>
-  </a>
-  <div class="nav-right">
-    <a class="nav-link" href="mailto:macemugames@gmail.com">Contacto</a>
-    <button class="theme-btn" data-theme-toggle aria-label="Cambiar tema">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    </button>
-  </div>
-</nav>
+<button class="theme-btn" data-tt aria-label="Cambiar tema">
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</button>
+
+<div class="logo-wrap">
+  <svg width="40" height="40" viewBox="0 0 32 32" fill="none" aria-label="FOKO Games logo">
+    <rect width="32" height="32" rx="8" fill="var(--primary)" opacity="0.15"/>
+    <rect x="6" y="11" width="20" height="12" rx="4" stroke="var(--primary)" stroke-width="2" fill="none"/>
+    <circle cx="20" cy="17" r="1.5" fill="var(--primary)"/>
+    <circle cx="23" cy="14.5" r="1.5" fill="var(--primary)"/>
+    <line x1="10" y1="17" x2="13" y2="17" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="11.5" y1="15.5" x2="11.5" y2="18.5" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  <span class="logo-text">FOKO Games</span>
+</div>
+
+<p class="slogan">Juegos hechos con pasión por el fútbol</p>
+
 <footer>
-  <span>© 2026 Macemu Games</span>
   <a href="delete-data.html">Eliminar mis datos</a>
-  <a href="mailto:macemugames@gmail.com">macemugames@gmail.com</a>
 </footer>
 
 <script>
 (function(){
-  const t = document.querySelector('[data-theme-toggle]');
-  const r = document.documentElement;
-  let d = matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
-  r.setAttribute('data-theme', d);
-  const sun = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
-  const moon = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-  if (t) {
-    t.innerHTML = d === 'dark' ? sun : moon;
-    t.addEventListener('click', () => {
-      d = d === 'dark' ? 'light' : 'dark';
-      r.setAttribute('data-theme', d);
-      t.innerHTML = d === 'dark' ? sun : moon;
-    });
-  }
+  const t=document.querySelector('[data-tt]'),r=document.documentElement;
+  let d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+  r.setAttribute('data-theme',d);
+  const sun='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+  const moon='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  if(t){t.innerHTML=d==='dark'?sun:moon;t.addEventListener('click',()=>{d=d==='dark'?'light':'dark';r.setAttribute('data-theme',d);t.innerHTML=d==='dark'?sun:moon;});}
 })();
 </script>
 </body>
