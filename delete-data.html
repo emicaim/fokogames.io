@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eliminar mis datos – PC Soccer Mundial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --color-bg: #f7f6f2;
+      --color-surface: #ffffff;
+      --color-border: rgba(0,0,0,0.10);
+      --color-text: #1a1a1a;
+      --color-text-muted: #6b7280;
+      --color-primary: #01696f;
+      --color-primary-hover: #0c4e54;
+      --color-success-bg: #d1fae5;
+      --color-success-text: #065f46;
+      --color-warning-bg: #fef3c7;
+      --color-warning-text: #92400e;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    [data-theme="dark"] {
+      --color-bg: #111110;
+      --color-surface: #1c1b19;
+      --color-border: rgba(255,255,255,0.10);
+      --color-text: #e5e4e0;
+      --color-text-muted: #9ca3af;
+      --color-primary: #4f98a3;
+      --color-primary-hover: #227f8b;
+      --color-success-bg: #064e3b;
+      --color-success-text: #6ee7b7;
+      --color-warning-bg: #451a03;
+      --color-warning-text: #fcd34d;
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--color-text);
+      background: var(--color-bg);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-surface);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      text-decoration: none;
+      color: var(--color-text);
+    }
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+    .logo-name {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .logo-sub {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      font-weight: 400;
+    }
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 0.4rem 0.5rem;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+      transition: color 180ms, border-color 180ms;
+    }
+    .theme-toggle:hover { color: var(--color-text); border-color: var(--color-text-muted); }
+
+    /* Main */
+    main {
+      flex: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 3rem;
+      width: 100%;
+    }
+
+    .page-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-size: clamp(1.5rem, 1.2rem + 1.25vw, 2rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .subtitle {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2rem;
+      max-width: 52ch;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-md);
+    }
+    .card-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      margin-bottom: 0.875rem;
+    }
+    .card p {
+      font-size: 0.9375rem;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+    .card p:last-child { margin-bottom: 0; }
+
+    /* Data table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+    .data-table th {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.8125rem;
+    }
+    .data-table td {
+      padding: 0.625rem 0.75rem;
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text);
+      vertical-align: middle;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.2rem 0.5rem;
+      border-radius: 9999px;
+    }
+    .badge-yes { background: var(--color-success-bg); color: var(--color-success-text); }
+    .badge-no  { background: var(--color-warning-bg); color: var(--color-warning-text); }
+
+    /* Steps */
+    .steps { list-style: none; counter-reset: steps; }
+    .steps li {
+      counter-increment: steps;
+      display: flex;
+      gap: 0.875rem;
+      align-items: flex-start;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.9375rem;
+    }
+    .steps li:last-child { border-bottom: none; padding-bottom: 0; }
+    .step-num {
+      flex-shrink: 0;
+      width: 1.625rem;
+      height: 1.625rem;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.1rem;
+    }
+
+    /* Notice */
+    .notice {
+      background: var(--color-warning-bg);
+      color: var(--color-warning-text);
+      border-radius: var(--radius-md);
+      padding: 0.875rem 1rem;
+      font-size: 0.875rem;
+      margin-top: 1.25rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+
+    /* CTA button */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 180ms;
+      margin-top: 1.5rem;
+    }
+    .btn-primary:hover { background: var(--color-primary-hover); }
+
+    /* Footer */
+    footer {
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid var(--color-border);
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--color-text-muted);
+    }
+    footer a { color: var(--color-primary); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 480px) {
+      main { padding: 1.75rem 1rem 2.5rem; }
+      .card { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <!-- SVG logo: soccer ball + world cup trophy silhouette -->
+    <svg class="logo-icon" viewBox="0 0 36 36" fill="none" aria-label="PC Soccer Mundial logo" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="16" fill="var(--color-primary)" opacity="0.12"/>
+      <circle cx="18" cy="18" r="11" stroke="var(--color-primary)" stroke-width="2" fill="none"/>
+      <!-- pentagon pattern suggestion -->
+      <polygon points="18,9 21,14 27,14 22.5,18 24.5,24 18,20.5 11.5,24 13.5,18 9,14 15,14" fill="var(--color-primary)" opacity="0.25"/>
+      <circle cx="18" cy="18" r="3" fill="var(--color-primary)"/>
+    </svg>
+    <div>
+      <div class="logo-name">PC Soccer Mundial</div>
+      <div class="logo-sub">por Macemu Games</div>
+    </div>
+  </div>
+  <button class="theme-toggle" data-theme-toggle aria-label="Cambiar tema">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</header>
+
+<main>
+  <span class="page-tag">Privacidad de datos</span>
+  <h1>Solicitar eliminación de datos</h1>
+  <p class="subtitle">Aquí podés ver qué datos guarda PC Soccer Mundial y cómo solicitar su eliminación en cualquier momento.</p>
+
+  <!-- Qué datos guardamos -->
+  <div class="card">
+    <div class="card-title">Datos que almacena la app</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Tipo de dato</th>
+          <th>Descripción</th>
+          <th>Se elimina al desinstalar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ID de usuario anónimo</td>
+          <td>Generado automáticamente al instalar. Sin nombre ni email.</td>
+          <td><span class="badge badge-yes">Sí</span></td>
+        </tr>
+        <tr>
+          <td>Predicciones</td>
+          <td>Los resultados que ingresaste en la quiniela.</td>
+          <td><span class="badge badge-yes">Sí</span></td>
+        </tr>
+        <tr>
+          <td>Puntaje / ranking</td>
+          <td>Tu posición en el grupo de la quiniela.</td>
+          <td><span class="badge badge-yes">Sí</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="notice">
+      ⚠️ El servidor será dado de baja al finalizar el Mundial. Todos los datos del servidor se eliminarán automáticamente en esa fecha.
+    </div>
+  </div>
+
+  <!-- Cómo eliminar -->
+  <div class="card">
+    <div class="card-title">Cómo eliminar tus datos ahora</div>
+    <ol class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div>Desinstalá la app <strong>PC Soccer Mundial</strong> de tu dispositivo. Esto elimina tu ID local y todas las predicciones guardadas localmente.</div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div>Si querés que eliminemos también tus datos del servidor (predicciones y puntaje), enviá un email a <strong>macemugames@gmail.com</strong> con el asunto <em>"Eliminar mis datos - PC Soccer Mundial"</em> e indicá tu ID de usuario (lo encontrás en la pantalla de perfil de la app).</div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div>Procesamos la solicitud en un plazo de <strong>7 días hábiles</strong> y te respondemos por email confirmando la eliminación.</div>
+      </li>
+    </ol>
+
+    <a class="btn-primary" href="mailto:macemugames@gmail.com?subject=Eliminar%20mis%20datos%20-%20PC%20Soccer%20Mundial&body=Hola%2C%20solicito%20la%20eliminaci%C3%B3n%20de%20mis%20datos%20de%20la%20app%20PC%20Soccer%20Mundial.%0A%0AMi%20ID%20de%20usuario%20es%3A%20" target="_blank" rel="noopener noreferrer">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Enviar solicitud por email
+    </a>
+  </div>
+</main>
+
+<footer>
+  PC Soccer Mundial &mdash; Desarrollado por <a href="mailto:macemugames@gmail.com">Macemu Games</a>
+</footer>
+
+<script>
+(function(){
+  const t = document.querySelector('[data-theme-toggle]');
+  const r = document.documentElement;
+  let d = matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+  r.setAttribute('data-theme', d);
+  const sunIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+  const moonIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  if (t) {
+    t.innerHTML = d === 'dark' ? sunIcon : moonIcon;
+    t.addEventListener('click', () => {
+      d = d === 'dark' ? 'light' : 'dark';
+      r.setAttribute('data-theme', d);
+      t.innerHTML = d === 'dark' ? sunIcon : moonIcon;
+      t.setAttribute('aria-label', 'Cambiar a modo ' + (d === 'dark' ? 'claro' : 'oscuro'));
+    });
+  }
+})();
+</script>
+</body>
+</html>
