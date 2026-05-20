@@ -1,14 +1,116 @@
-Política de Privacidad
-Última actualización: 15 de mayo de 2026
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Politica de Privacidad - Foko Games</title>
+  <style>
+    :root { --bg:#f7f6f2;--surface:#ffffff;--text:#28251d;--muted:#7a7974;--primary:#01696f;--border:#dcd9d5;--r:0.75rem; }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:1rem;line-height:1.7;padding:2rem 1rem}
+    .container{max-width:760px;margin:0 auto;background:var(--surface);border-radius:var(--r);border:1px solid var(--border);padding:3rem 2.5rem}
+    .logo{display:flex;align-items:center;gap:.75rem;margin-bottom:2.5rem}
+    .logo-name{font-size:1.25rem;font-weight:700;color:var(--primary)}
+    .lang-toggle{display:flex;gap:.5rem;margin-bottom:2rem}
+    .lang-btn{padding:.35rem 1rem;border-radius:999px;border:1px solid var(--border);background:none;font-size:.875rem;cursor:pointer;color:var(--muted)}
+    .lang-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .policy{display:none}.policy.visible{display:block}
+    h1{font-size:1.6rem;font-weight:700;margin-bottom:.4rem}
+    .updated{font-size:.875rem;color:var(--muted);margin-bottom:2rem}
+    .app-block{border:1px solid var(--border);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem;background:#fafaf8}
+    .app-block h2{font-size:1.1rem;font-weight:700;color:var(--primary);margin-bottom:1.25rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
+    .app-block h3{font-size:.95rem;font-weight:600;margin:1rem 0 .3rem}
+    .app-block p{font-size:.95rem;color:var(--muted)}
+    .badge{display:inline-block;background:#e6f4f1;color:var(--primary);font-size:.78rem;font-weight:700;padding:.1rem .55rem;border-radius:999px;margin-left:.4rem;vertical-align:middle}
+    .contact{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:.9rem;color:var(--muted)}
+    .contact a{color:var(--primary);text-decoration:none}
+    footer{text-align:center;margin-top:2rem;font-size:.8rem;color:var(--muted)}
+    footer a{color:var(--muted)}
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <rect width="36" height="36" rx="8" fill="#01696f"/>
+      <path d="M10 18 L18 10 L26 18 L18 26 Z" fill="none" stroke="white" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="18" cy="18" r="3" fill="white"/>
+    </svg>
+    <span class="logo-name">Foko Games</span>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('es',this)">Español</button>
+    <button class="lang-btn" onclick="setLang('en',this)">English</button>
+  </div>
 
-Datos que recopilamos
-La app HEROES OF DARKLIGTH NO recopila datos.
+  <!-- ESPAÑOL -->
+  <div class="policy visible" id="policy-es">
+    <h1>Política de Privacidad</h1>
+    <p class="updated">Última actualización: 15 de mayo de 2026</p>
+    <div class="app-block">
+      <h2>PC Soccer Mundial</h2>
+      <h3>Datos que recopilamos <span class="badge">NINGUNO</span></h3>
+      <p>PC Soccer Mundial no recopila, almacena ni transmite ningún dato personal. La aplicación genera un identificador local en el dispositivo para reconocerte sin necesidad de registro. Este identificador nunca sale del dispositivo ni se comparte con terceros.</p>
+      <h3>Uso de datos</h3>
+      <p>La app no utiliza ningún sistema de analíticas, publicidad ni seguimiento.</p>
+      <h3>Almacenamiento</h3>
+      <p>Toda la información (quinielas, predicciones, puntuaciones) se almacena exclusivamente en el almacenamiento local del dispositivo. No existe ningún servidor que procese datos del usuario.</p>
+      <h3>Publicidad</h3>
+      <p>La aplicación no contiene publicidad de ningún tipo.</p>
+    </div>
+    <div class="app-block">
+      <h2>Heroes of Darklight</h2>
+      <h3>Datos que recopilamos <span class="badge">NINGUNO</span></h3>
+      <p>Heroes of Darklight no recopila datos.</p>
+      <h3>Uso de los datos</h3>
+      <p>No recopila datos.</p>
+      <h3>Almacenamiento</h3>
+      <p>No recopila datos.</p>
+    </div>
+    <div class="contact">
+      <strong>Contacto:</strong> Para cualquier consulta relacionada con la privacidad, escribinos a
+      <a href="mailto:macemugames@gmail.com">macemugames@gmail.com</a>
+    </div>
+  </div>
 
-Uso de los datos
-NO recopila datos.
-
-Almacenamiento
-NO recopila datos.
-
-Contacto
-macemugames@gmail.com
+  <!-- ENGLISH -->
+  <div class="policy" id="policy-en">
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: May 15, 2026</p>
+    <div class="app-block">
+      <h2>PC Soccer Mundial</h2>
+      <h3>Data we collect <span class="badge">NONE</span></h3>
+      <p>PC Soccer Mundial does not collect, store, or transmit any personal data. The app generates a local identifier on the device to recognize you without requiring registration. This identifier never leaves the device and is never shared with third parties.</p>
+      <h3>Use of data</h3>
+      <p>The app does not use any analytics, advertising, or tracking systems.</p>
+      <h3>Storage</h3>
+      <p>All information (predictions, scores, rankings) is stored exclusively in the device local storage. No server processes user data of any kind.</p>
+      <h3>Advertising</h3>
+      <p>The application contains no advertising of any kind.</p>
+    </div>
+    <div class="app-block">
+      <h2>Heroes of Darklight</h2>
+      <h3>Data we collect <span class="badge">NONE</span></h3>
+      <p>Heroes of Darklight does not collect any data.</p>
+      <h3>Use of data</h3>
+      <p>No data is collected.</p>
+      <h3>Storage</h3>
+      <p>No data is collected.</p>
+    </div>
+    <div class="contact">
+      <strong>Contact:</strong> For any privacy-related questions, please reach us at
+      <a href="mailto:macemugames@gmail.com">macemugames@gmail.com</a>
+    </div>
+  </div>
+</div>
+<footer>&#169; 2026 Foko Games &middot; <a href="mailto:macemugames@gmail.com">macemugames@gmail.com</a></footer>
+<script>
+  function setLang(lang,btn){
+    document.querySelectorAll('.policy').forEach(p=>p.classList.remove('visible'));
+    document.getElementById('policy-'+lang).classList.add('visible');
+    document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
