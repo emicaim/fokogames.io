@@ -1,21 +1,259 @@
 <!DOCTYPE html>
 <html lang="es">
-<head><meta charset="UTF-8"><title>Política de Privacidad — PC SOCCER MUNDIAL</title></head>
-<body style="font-family:sans-serif;max-width:600px;margin:40px auto;padding:0 20px">
-  <h1>Política de Privacidad</h1>
-  <p><strong>Última actualización:</strong> 15 de mayo de 2026</p>
-  <h2>Datos que recopilamos</h2>
-<p>La app PC SOCCER MUNDIAL recopila únicamente un identificador 
-anónimo generado por el dispositivo y las predicciones ingresadas por 
-el usuario. No se recopilan nombres, emails ni datos personales 
-identificables.</p>
-  <h2>Uso de los datos</h2>
-  <p>Los datos se usan exclusivamente para mostrar rankings y predicciones
-  dentro de los grupos creados por los usuarios.
-  No se comparten con terceros.</p>
-  <h2>Almacenamiento</h2>
-  <p>Los datos se almacenan en servidores seguros. No se venden ni ceden a terceros.</p>
-  <h2>Contacto</h2>
-  <p>macemugames@gmail.com</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foko Games — Indie Retro Game Studio</title>
+  <meta name="description" content="Homebrew NES games programmed in 6502 assembly. Action, platformers, shooters and puzzles with authentic 8-bit style." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{background:#050505;color:#F0F0F0;font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    body{cursor:none}
+    *{cursor:none}
+    .pixel-cursor{position:fixed;top:0;left:0;width:12px;height:12px;background:#FF2D2D;pointer-events:none;z-index:10000;transition:background .2s,width .2s,height .2s}
+    .pixel-cursor.hover{background:#F5A623;width:16px;height:16px}
+    @media(pointer:coarse){.pixel-cursor{display:none!important}body,*{cursor:auto!important}}
+    .crt-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;opacity:.35;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 4px)}
+    .font-display{font-family:'Press Start 2P',monospace}
+    .font-mono{font-family:'Space Mono',monospace}
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:#050505}
+    ::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
+    ::-webkit-scrollbar-thumb:hover{background:#FF2D2D}
+    .starfield{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:0}
+    .stars{position:absolute;top:0;left:0;width:100%;height:200%;background:transparent}
+    .stars-1{width:2px;height:2px;background:transparent;box-shadow:50px 80px #fff,120px 200px #fff,300px 150px #fff,450px 300px #fff,600px 100px #fff,750px 250px #fff,900px 180px #fff,1050px 350px #fff,200px 400px #fff,350px 500px #fff,500px 450px #fff,650px 550px #fff,800px 480px #fff,950px 600px #fff,1100px 520px #fff,150px 650px #fff,400px 700px #fff,550px 750px #fff,700px 680px #fff,850px 800px #fff,100px 900px #fff,250px 850px #fff,480px 950px #fff,620px 880px #fff,780px 980px #fff,920px 920px #fff,1080px 1050px #fff,180px 1100px #fff,380px 1200px #fff,530px 1150px #fff,720px 1250px #fff,880px 1180px #fff,1020px 1300px #fff,130px 1350px #fff,320px 1400px #fff,580px 1380px #fff,680px 1450px #fff,830px 1420px #fff,980px 1480px #fff,1150px 1500px #fff,70px 1550px #fff,420px 1600px #fff,560px 1580px #fff,770px 1650px #fff,930px 1620px #fff,1120px 1700px #fff,30px 1750px #fff,260px 1800px #fff,470px 1780px #fff,640px 1850px #fff,860px 1820px #fff,1030px 1880px #fff;animation:starfield-scroll 120s linear infinite}
+    .stars-2{width:3px;height:3px;background:transparent;box-shadow:100px 150px rgba(255,255,255,.7),250px 300px rgba(255,255,255,.7),400px 100px rgba(255,255,255,.7),550px 450px rgba(255,255,255,.7),700px 250px rgba(255,255,255,.7),850px 500px rgba(255,255,255,.7),1000px 200px rgba(255,255,255,.7),1150px 400px rgba(255,255,255,.7),150px 550px rgba(255,255,255,.7),350px 650px rgba(255,255,255,.7),600px 700px rgba(255,255,255,.7),800px 600px rgba(255,255,255,.7),950px 750px rgba(255,255,255,.7),1100px 850px rgba(255,255,255,.7),200px 950px rgba(255,255,255,.7),450px 900px rgba(255,255,255,.7),750px 1050px rgba(255,255,255,.7),900px 1000px rgba(255,255,255,.7),50px 1200px rgba(255,255,255,.7),300px 1150px rgba(255,255,255,.7),500px 1250px rgba(255,255,255,.7),650px 1300px rgba(255,255,255,.7),820px 1350px rgba(255,255,255,.7),1050px 1280px rgba(255,255,255,.7);animation:starfield-scroll 180s linear infinite}
+    .stars-3{width:2px;height:2px;background:transparent;box-shadow:180px 250px rgba(255,255,255,.4),380px 400px rgba(255,255,255,.4),580px 200px rgba(255,255,255,.4),780px 550px rgba(255,255,255,.4),980px 350px rgba(255,255,255,.4),1180px 600px rgba(255,255,255,.4),280px 700px rgba(255,255,255,.4),480px 800px rgba(255,255,255,.4),680px 750px rgba(255,255,255,.4),880px 900px rgba(255,255,255,.4),1080px 950px rgba(255,255,255,.4),1280px 850px rgba(255,255,255,.4),130px 1100px rgba(255,255,255,.4),430px 1050px rgba(255,255,255,.4),630px 1200px rgba(255,255,255,.4),830px 1150px rgba(255,255,255,.4),1030px 1300px rgba(255,255,255,.4),1230px 1250px rgba(255,255,255,.4);animation:starfield-scroll 240s linear infinite}
+    @keyframes starfield-scroll{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+    .nes-loader{display:flex;gap:8px;justify-content:center;margin-top:24px}
+    .pixel-dot{width:12px;height:12px;animation:nes-pulse .8s ease-in-out infinite}
+    .pixel-dot:nth-child(1){background:#FF2D2D;animation-delay:0s}
+    .pixel-dot:nth-child(2){background:#F5A623;animation-delay:.2s}
+    .pixel-dot:nth-child(3){background:#00D4FF;animation-delay:.4s}
+    @keyframes nes-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+    .hero{position:relative;min-height:100dvh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .hero-content{position:relative;z-index:10;text-align:center;padding:0 20px;max-width:800px}
+    .hero-tagline{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#00D4FF;margin-bottom:24px;opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease .3s forwards}
+    .hero-title{font-family:'Press Start 2P',monospace;font-size:clamp(1.4rem,4vw,2.8rem);letter-spacing:4px;text-transform:uppercase;color:#F0F0F0;line-height:1.4;margin-bottom:8px;opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease .5s forwards}
+    .hero-subtitle{font-family:'Inter',sans-serif;font-size:clamp(.8rem,2vw,1.1rem);color:#8A8A8A;margin-top:24px;opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease .9s forwards}
+    .scroll-indicator{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeInUp .6s ease 1.2s forwards}
+    .scroll-indicator span{font-family:'Space Mono',monospace;font-size:9px;color:#4A4A4A;letter-spacing:3px}
+    .scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,#4A4A4A,transparent)}
+    @keyframes fadeInUp{to{opacity:1;transform:translateY(0)}}
+    .section{padding:80px 5vw;max-width:1400px;margin:0 auto}
+    .section-header{text-align:center;margin-bottom:48px}
+    .section-title{font-family:'Press Start 2P',monospace;font-size:clamp(1rem,3vw,1.6rem);letter-spacing:3px;text-transform:uppercase;color:#F5A623}
+    .section-line{margin:16px auto 0;width:60px;height:3px;background:linear-gradient(to right,#FF2D2D,#F5A623)}
+    .games-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+    .game-card{background:#0A0A0F;border:1px solid #1A1A1A;border-radius:4px;overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .3s;opacity:0;transform:translateY(40px)}
+    .game-card.visible{opacity:1;transform:translateY(0);transition:opacity .6s ease,transform .6s ease,border-color .3s,box-shadow .3s}
+    .game-card:hover{border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow);transform:translateY(-4px)}
+    .game-image{overflow:hidden;aspect-ratio:16/10}
+    .game-image img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+    .game-card:hover .game-image img{transform:scale(1.05)}
+    .game-body{padding:20px}
+    .game-title-row{display:flex;align-items:start;justify-content:space-between;gap:8px;margin-bottom:8px}
+    .game-title{font-family:'Press Start 2P',monospace;font-size:11px;color:#F0F0F0;line-height:1.5}
+    .game-badge{font-family:'Press Start 2P',monospace;font-size:7px;background:#F5A623;color:#000;padding:4px 8px;border-radius:2px;white-space:nowrap;flex-shrink:0}
+    .game-genre{font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
+    .game-desc{font-family:'Inter',sans-serif;font-size:13px;color:#8A8A8A;line-height:1.6;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .game-platforms{font-family:'Space Mono',monospace;font-size:10px;color:#4A4A4A;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+    .game-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Press Start 2P',monospace;font-size:8px;padding:10px 20px;border-radius:2px;color:#fff;transition:transform .2s,box-shadow .2s;border:none}
+    .game-btn:hover{transform:scale(1.05);box-shadow:0 0 15px var(--accent-glow)}
+    .game-btn svg{width:10px;height:10px}
+    .about-section{background:#0A0A0F;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:40px 40px}
+    .about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:start}
+    @media(max-width:768px){.about-grid{grid-template-columns:1fr}}
+    .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .stat-item{text-align:center;padding:16px;background:rgba(255,255,255,.02);border-radius:4px;border:1px solid rgba(255,255,255,.05);opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+    .stat-item.visible{opacity:1;transform:translateY(0)}
+    .stat-value{font-family:'Press Start 2P',monospace;font-size:clamp(1.2rem,3vw,2rem)}
+    .stat-label{font-family:'Space Mono',monospace;font-size:10px;color:#8A8A8A;text-transform:uppercase;letter-spacing:2px;margin-top:8px}
+    .about-text{font-family:'Inter',sans-serif;font-size:15px;line-height:1.8;color:#F0F0F0;opacity:0;transform:translateX(30px);transition:opacity .7s ease,transform .7s ease}
+    .about-text.visible{opacity:1;transform:translateX(0)}
+    .about-text p{margin-bottom:16px}
+    .about-text strong{font-weight:600}
+    .about-signature{font-family:'Press Start 2P',monospace;font-size:10px;color:#F5A623;margin-top:24px}
+    .contact-section{text-align:center;padding:60px 5vw 40px;background:linear-gradient(to bottom,#0A0A0F 0%,#050505 100%)}
+    .contact-title{font-family:'Press Start 2P',monospace;font-size:clamp(.9rem,2.5vw,1.3rem);letter-spacing:3px;margin-bottom:12px}
+    .contact-desc{font-family:'Inter',sans-serif;font-size:13px;color:#8A8A8A;margin-bottom:28px}
+    .social-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:32px}
+    .social-btn{display:inline-flex;align-items:center;gap:8px;font-family:'Press Start 2P',monospace;font-size:8px;padding:12px 24px;border-radius:2px;transition:all .2s;border:1px solid}
+    .social-btn:hover{transform:scale(1.05)}
+    .social-btn.red{border-color:#FF2D2D;color:#FF2D2D;background:transparent}
+    .social-btn.red:hover{background:#FF2D2D;color:#fff}
+    .social-btn.white{border-color:#F0F0F0;color:#F0F0F0;background:transparent}
+    .social-btn.white:hover{background:#F0F0F0;color:#000}
+    .footer-line{max-width:400px;height:1px;background:#1A1A1A;margin:0 auto 24px}
+    .footer-text{font-family:'Space Mono',monospace;font-size:9px;color:#4A4A4A;text-transform:uppercase;letter-spacing:1px;line-height:1.8}
+    .footer-pixels{display:flex;justify-content:center;gap:6px;margin-top:16px}
+    .footer-pixel{width:10px;height:10px}
+    .privacy-links{display:flex;justify-content:center;gap:16px;margin-top:16px;flex-wrap:wrap}
+    .privacy-links a{font-family:'Space Mono',monospace;font-size:10px;color:#4A4A4A;transition:color .2s;text-decoration:underline}
+    .privacy-links a:hover{color:#F5A623}
+    .scroll-top{position:fixed;bottom:20px;right:20px;z-index:50;font-family:'Press Start 2P',monospace;font-size:10px;padding:10px 14px;border:1px solid #333;background:#0A0A0F;color:#F0F0F0;border-radius:2px;transition:opacity .3s,border-color .3s;opacity:0;pointer-events:none}
+    .scroll-top.visible{opacity:1;pointer-events:auto}
+    .scroll-top:hover{border-color:#FF2D2D;color:#FF2D2D}
+    @media(max-width:640px){.games-grid{grid-template-columns:1fr}.section{padding:60px 4vw}.stats-grid{gap:16px}}
+  </style>
+</head>
+<body>
+  <div class="crt-overlay" aria-hidden="true"></div>
+  <div class="pixel-cursor" id="cursor" aria-hidden="true"></div>
+  <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Volver arriba">&#9650;</button>
+
+  <section class="hero" id="hero">
+    <div class="starfield">
+      <div class="stars stars-1"></div>
+      <div class="stars stars-2"></div>
+      <div class="stars stars-3"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-tagline">DESARROLLADOR INDIE DE VIDEOJUEGOS RETRO</p>
+      <h1 class="hero-title">FOKO GAMES</h1>
+      <div class="nes-loader">
+        <div class="pixel-dot"></div>
+        <div class="pixel-dot"></div>
+        <div class="pixel-dot"></div>
+      </div>
+      <p class="hero-subtitle">Homebrew para NES &middot; Acci&oacute;n &middot; Puzzles &middot; Pixel Art</p>
+    </div>
+    <div class="scroll-indicator">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <section id="games" style="background:linear-gradient(to bottom,#050505,#0A0A0F)">
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">NUESTROS JUEGOS</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="games-grid">
+        <article class="game-card" style="--accent:#FF2D2D;--accent-glow:rgba(255,45,45,0.3)" data-delay="0">
+          <div class="game-image"><img src="night-city-cover.jpg" alt="Night City" loading="lazy"></div>
+          <div class="game-body">
+            <div class="game-title-row"><h3 class="game-title">NIGHT CITY</h3></div>
+            <p class="game-genre" style="color:#FF2D2D">ACTION &middot; PLATFORMER</p>
+            <p class="game-desc">Homebrew para NES programado en ensamblador 6502. 80 niveles en 8 zonas tem&aacute;ticas con jefes finales.</p>
+            <p class="game-platforms">NES &middot; EMULADOR</p>
+            <a href="https://foko-games.itch.io/nigth-city" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#FF2D2D">JUGAR <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
+          </div>
+        </article>
+        <article class="game-card" style="--accent:#00D4FF;--accent-glow:rgba(0,212,255,0.3)" data-delay="1">
+          <div class="game-image"><img src="invaders-cover.jpg" alt="Foko Games Invaders" loading="lazy"></div>
+          <div class="game-body">
+            <div class="game-title-row"><h3 class="game-title">FOKO GAMES INVADERS</h3></div>
+            <p class="game-genre" style="color:#00D4FF">SHOOTER &middot; ARCADE</p>
+            <p class="game-desc">Shooter espacial retro inspirado en la era de 8 bits. Motor propio en ensamblador ca65 con m&uacute;sica chiptune original.</p>
+            <p class="game-platforms">NES &middot; EMULADOR</p>
+            <a href="https://foko-games.itch.io/foko-games-invaders" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#00D4FF;color:#000">JUGAR <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
+          </div>
+        </article>
+        <article class="game-card" style="--accent:#A855F7;--accent-glow:rgba(168,85,247,0.3)" data-delay="2">
+          <div class="game-image"><img src="heroes-cover.jpg" alt="Heroes of Darkligth" loading="lazy"></div>
+          <div class="game-body">
+            <div class="game-title-row"><h3 class="game-title">HEROES OF DARKLIGTH</h3></div>
+            <p class="game-genre" style="color:#A855F7">ADVENTURE &middot; PUZZLE</p>
+            <p class="game-desc">Acci&oacute;n y puzzles con est&eacute;tica NES. Administra las habilidades de tus h&eacute;roes y salva al mundo. Batallas &uacute;nicas contra cada jefe.</p>
+            <p class="game-platforms">WINDOWS &middot; MAC &middot; LINUX</p>
+            <a href="https://foko-games.itch.io/heroes-of-darkligth" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#A855F7">JUGAR <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
+          </div>
+        </article>
+        <article class="game-card" style="--accent:#EC4899;--accent-glow:rgba(236,72,153,0.3)" data-delay="3">
+          <div class="game-image"><img src="pixelcandyball-cover.jpg" alt="Pixel Candy Ball" loading="lazy"></div>
+          <div class="game-body">
+            <div class="game-title-row"><h3 class="game-title">PIXEL CANDY BALL</h3><span class="game-badge">FREE</span></div>
+            <p class="game-genre" style="color:#EC4899">PUZZLE &middot; CASUAL</p>
+            <p class="game-desc">Primer proyecto personal con assets gratuitos de Unity Asset Store. Un puzzle colorido y adictivo.</p>
+            <p class="game-platforms">BROWSER</p>
+            <a href="https://foko-games.itch.io/pixelcandyball" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#EC4899">JUGAR <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section" id="about">
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">SOBRE NOSOTROS</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="about-grid">
+        <div class="stats-grid">
+          <div class="stat-item"><div class="stat-value" style="color:#FF2D2D">4+</div><div class="stat-label">JUEGOS</div></div>
+          <div class="stat-item"><div class="stat-value" style="color:#00D4FF">2019</div><div class="stat-label">DESDE</div></div>
+          <div class="stat-item"><div class="stat-value" style="color:#F5A623">6502</div><div class="stat-label">ASSEMBLER</div></div>
+          <div class="stat-item"><div class="stat-value" style="color:#A855F7">NES</div><div class="stat-label">HOMEBREW</div></div>
+        </div>
+        <div class="about-text">
+          <p><strong style="color:#F5A623">Foko Games</strong> es un estudio de videojuegos indie espa&ntilde;ol apasionado por la nostalgia de los 8-bits. Creamos experiencias aut&eacute;nticas que rinden homenaje a la era dorada de los videojuegos.</p>
+          <p>Nuestros t&iacute;tulos para <strong style="color:#FF2D2D">NES</strong> est&aacute;n programados desde cero en <strong style="color:#00D4FF">ensamblador 6502</strong>, el mismo lenguaje de la consola original, garantizando una experiencia 100% aut&eacute;ntica tanto en consola real como en emuladores.</p>
+          <p>De los neones de <strong style="color:#FF2D2D">Night City</strong> a las galaxias de <strong style="color:#00D4FF">Foko Games Invaders</strong>, pasando por las tierras de <strong style="color:#A855F7">Heroes of Darkligth</strong> y los dulces mundos de <strong style="color:#EC4899">Pixel Candy Ball</strong> &mdash; cada juego es una carta de amor al pixel art.</p>
+          <p class="about-signature">&mdash; FOKO GAMES</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <h2 class="contact-title">&iexcl;SIGUENOS!</h2>
+    <p class="contact-desc">Descarga nuestros juegos y &uacute;nete a la comunidad.</p>
+    <div class="social-links">
+      <a href="https://foko-games.itch.io" target="_blank" rel="noopener noreferrer" class="social-btn red">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 12c0-1.1.9-2 2-2h2v10H5c-1.1 0-2-.9-2-2v-6zm7-2h4v10h-4V10zm6 0h2c1.1 0 2 .9 2 2v6c0 1.1-.9 2-2 2h-2V10zM7 3h10v4H7V3z"/></svg> itch.io
+      </a>
+      <a href="#" class="social-btn white">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> GitHub
+      </a>
+    </div>
+    <div class="footer-line"></div>
+    <p class="footer-text">&copy; 2025 FOKO GAMES. HECHO CON PIXELES Y PASI&Oacute;N.</p>
+    <p class="footer-text">NES ES UNA MARCA REGISTRADA DE NINTENDO.</p>
+    <div class="footer-pixels">
+      <div class="footer-pixel" style="background:#FF2D2D"></div>
+      <div class="footer-pixel" style="background:#F5A623"></div>
+      <div class="footer-pixel" style="background:#00D4FF"></div>
+      <div class="footer-pixel" style="background:#A855F7"></div>
+      <div class="footer-pixel" style="background:#EC4899"></div>
+    </div>
+    <div class="privacy-links">
+      <a href="hodPrivacy.html">Politica de Privacidad (Heroes of Darkligth)</a>
+      <a href="delete-data.html">Eliminar Datos</a>
+    </div>
+  </section>
+
+  <script>
+    (function(){
+      var c=document.getElementById('cursor');
+      if(!c||window.matchMedia('(pointer:coarse)').matches)return;
+      var mx=0,my=0,cx=0,cy=0;
+      document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});
+      document.addEventListener('mouseover',function(e){if(e.target.closest('a,button,.game-card'))c.classList.add('hover')});
+      document.addEventListener('mouseout',function(e){if(e.target.closest('a,button,.game-card'))c.classList.remove('hover')});
+      function anim(){cx+=(mx-cx)*.15;cy+=(my-cy)*.15;var s=c.classList.contains('hover')?8:6;c.style.transform='translate('+(cx-s)+'px,'+(cy-s)+'px)';requestAnimationFrame(anim);}
+      anim();
+    })();
+    (function(){
+      var b=document.getElementById('scrollTop');
+      window.addEventListener('scroll',function(){b.classList.toggle('visible',window.scrollY>500)},{passive:true});
+    })();
+    (function(){
+      var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+      document.querySelectorAll('.game-card').forEach(function(el,i){el.style.transitionDelay=(i*.15)+'s';o.observe(el)});
+      document.querySelectorAll('.stat-item').forEach(function(el,i){el.style.transitionDelay=(i*.1)+'s';o.observe(el)});
+      document.querySelectorAll('.about-text').forEach(function(el){o.observe(el)});
+    })();
+  </script>
 </body>
 </html>
+
