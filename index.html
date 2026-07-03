@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Foko Games — Indie Game Studio</title>
-  <meta name="description" content="Estudio indie de videojuegos. Juegos para NES en ensamblador 6502, juegos móviles para Android y juegos de escritorio con Unity. Pixel art, acción y puzzles." />
-  <meta property="og:title" content="Foko Games — Indie Game Studio" />
-  <meta property="og:description" content="Juegos NES en ensamblador 6502, mobile y Unity. Descubre NES Game Studio, nuestro editor para crear juegos de NES en el navegador." />
+  <title>Foko Games — Games, Soft &amp; Music</title>
+  <meta name="description" content="Foko Games: estudio indie de videojuegos NES/Unity/Android, software (ImpreContaAR, IoT) y música original bajo el proyecto F0K0." />
+  <meta property="og:title" content="Foko Games — Games, Soft & Music" />
+  <meta property="og:description" content="Juegos NES, mobile y Unity, software con ImpreContaAR e IoT, y música original F0K0. Incluye NES Game Studio, nuestro editor de juegos NES en el navegador." />
   <meta property="og:image" content="nesgamestudio.png" />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,8 +24,6 @@
     .pixel-cursor.hover{background:#F5A623;width:16px;height:16px}
     @media(pointer:coarse){.pixel-cursor{display:none!important}body,*{cursor:auto!important}}
     .crt-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;opacity:.35;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 4px)}
-    .font-display{font-family:'Press Start 2P',monospace}
-    .font-mono{font-family:'Space Mono',monospace}
     ::-webkit-scrollbar{width:6px}
     ::-webkit-scrollbar-track{background:#050505}
     ::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
@@ -36,24 +34,22 @@
     .stars-2{width:3px;height:3px;background:transparent;box-shadow:100px 150px rgba(255,255,255,.7),250px 300px rgba(255,255,255,.7),400px 100px rgba(255,255,255,.7),550px 450px rgba(255,255,255,.7),700px 250px rgba(255,255,255,.7),850px 500px rgba(255,255,255,.7),1000px 200px rgba(255,255,255,.7),1150px 400px rgba(255,255,255,.7),150px 550px rgba(255,255,255,.7),350px 650px rgba(255,255,255,.7),600px 700px rgba(255,255,255,.7),800px 600px rgba(255,255,255,.7),950px 750px rgba(255,255,255,.7),1100px 850px rgba(255,255,255,.7),200px 950px rgba(255,255,255,.7),450px 900px rgba(255,255,255,.7),750px 1050px rgba(255,255,255,.7),900px 1000px rgba(255,255,255,.7),50px 1200px rgba(255,255,255,.7),300px 1150px rgba(255,255,255,.7),500px 1250px rgba(255,255,255,.7),650px 1300px rgba(255,255,255,.7),820px 1350px rgba(255,255,255,.7),1050px 1280px rgba(255,255,255,.7);animation:starfield-scroll 180s linear infinite}
     .stars-3{width:2px;height:2px;background:transparent;box-shadow:180px 250px rgba(255,255,255,.4),380px 400px rgba(255,255,255,.4),580px 200px rgba(255,255,255,.4),780px 550px rgba(255,255,255,.4),980px 350px rgba(255,255,255,.4),1180px 600px rgba(255,255,255,.4),280px 700px rgba(255,255,255,.4),480px 800px rgba(255,255,255,.4),680px 750px rgba(255,255,255,.4),880px 900px rgba(255,255,255,.4),1080px 950px rgba(255,255,255,.4),1280px 850px rgba(255,255,255,.4),130px 1100px rgba(255,255,255,.4),430px 1050px rgba(255,255,255,.4),630px 1200px rgba(255,255,255,.4),830px 1150px rgba(255,255,255,.4),1030px 1300px rgba(255,255,255,.4),1230px 1250px rgba(255,255,255,.4);animation:starfield-scroll 240s linear infinite}
     @keyframes starfield-scroll{from{transform:translateY(0)}to{transform:translateY(-50%)}}
-    .nes-loader{display:flex;gap:8px;justify-content:center;margin-top:24px}
-    .pixel-dot{width:12px;height:12px;animation:nes-pulse .8s ease-in-out infinite}
-    .pixel-dot:nth-child(1){background:#FF2D2D;animation-delay:0s}
-    .pixel-dot:nth-child(2){background:#F5A623;animation-delay:.2s}
-    .pixel-dot:nth-child(3){background:#00D4FF;animation-delay:.4s}
-    @keyframes nes-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
-    .hero{position:relative;min-height:100dvh;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .hero-content{position:relative;z-index:10;text-align:center;padding:0 20px;max-width:800px}
+    .hero{position:relative;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:100px 20px 40px}
+    .hero-content{position:relative;z-index:10;text-align:center;max-width:800px}
     .hero-tagline{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#00D4FF;margin-bottom:24px;opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease .3s forwards}
     .hero-title{font-family:'Press Start 2P',monospace;font-size:clamp(1.4rem,4vw,2.8rem);letter-spacing:4px;text-transform:uppercase;color:#F0F0F0;line-height:1.4;margin-bottom:8px;opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease .5s forwards}
     .hero-subtitle{font-family:'Inter',sans-serif;font-size:clamp(.8rem,2vw,1.1rem);color:#8A8A8A;margin-top:24px;opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease .9s forwards}
-    .scroll-indicator{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeInUp .6s ease 1.2s forwards}
-    .scroll-indicator span{font-family:'Space Mono',monospace;font-size:9px;color:#4A4A4A;letter-spacing:3px}
-    .scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,#4A4A4A,transparent)}
     @keyframes fadeInUp{to{opacity:1;transform:translateY(0)}}
-    .site-nav{position:fixed;top:0;left:0;width:100%;z-index:200;display:flex;justify-content:center;gap:24px;padding:14px 20px;background:rgba(5,5,5,.85);backdrop-filter:blur(6px);border-bottom:1px solid #1A1A1A;flex-wrap:wrap}
+    .site-nav{position:fixed;top:0;left:0;width:100%;z-index:200;display:flex;justify-content:center;gap:22px;padding:14px 20px;background:rgba(5,5,5,.85);backdrop-filter:blur(6px);border-bottom:1px solid #1A1A1A;flex-wrap:wrap}
     .site-nav a{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8A8A8A;transition:color .2s}
     .site-nav a:hover{color:#F5A623}
+    .hub-grid{position:relative;z-index:10;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1000px;width:100%;margin-top:48px;opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease 1.1s forwards}
+    @media(max-width:900px){.hub-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:480px){.hub-grid{grid-template-columns:1fr}}
+    .hub-card{background:#0A0A0F;border:1px solid #1A1A1A;border-left:3px solid var(--accent);border-radius:4px;padding:20px 16px;text-align:left;transition:transform .25s,box-shadow .25s,border-color .25s}
+    .hub-card:hover{transform:translateY(-4px);box-shadow:0 0 18px var(--glow);border-color:var(--accent)}
+    .hub-card h3{font-family:'Press Start 2P',monospace;font-size:11px;color:var(--accent);margin-bottom:8px;letter-spacing:1px}
+    .hub-card p{font-family:'Space Mono',monospace;font-size:10px;color:#8A8A8A;line-height:1.5}
     .section{padding:80px 5vw;max-width:1400px;margin:0 auto}
     .section-header{text-align:center;margin-bottom:48px}
     .section-title{font-family:'Press Start 2P',monospace;font-size:clamp(1rem,3vw,1.6rem);letter-spacing:3px;text-transform:uppercase;color:#F5A623}
@@ -63,6 +59,7 @@
     .game-card{background:#0A0A0F;border:1px solid #1A1A1A;border-radius:4px;overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .3s;opacity:0;transform:translateY(40px)}
     .game-card.visible{opacity:1;transform:translateY(0);transition:opacity .6s ease,transform .6s ease,border-color .3s,box-shadow .3s}
     .game-card:hover{border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow);transform:translateY(-4px)}
+    .game-card.featured{border:1px solid var(--accent)}
     .game-image{overflow:hidden;aspect-ratio:16/10}
     .game-image img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
     .game-card:hover .game-image img{transform:scale(1.05)}
@@ -76,8 +73,19 @@
     .game-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Press Start 2P',monospace;font-size:8px;padding:10px 20px;border-radius:2px;color:#fff;transition:transform .2s,box-shadow .2s;border:none}
     .game-btn:hover{transform:scale(1.05);box-shadow:0 0 15px var(--accent-glow)}
     .game-btn svg{width:10px;height:10px}
-    .press-badge{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:9px;color:#8A8A8A;margin-top:10px}
+    .press-badge{display:block;font-family:'Space Mono',monospace;font-size:9px;color:#8A8A8A;margin-top:10px}
     .press-badge a{color:#00FF88;text-decoration:underline}
+    .soft-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+    .soft-card{background:#0A0A0F;border:1px solid #1A1A1A;border-left:3px solid #00FF88;border-radius:4px;padding:24px}
+    .soft-card h3{font-family:'Press Start 2P',monospace;font-size:11px;color:#00FF88;margin-bottom:10px}
+    .soft-card p{font-family:'Inter',sans-serif;font-size:13px;color:#8A8A8A;margin-bottom:14px}
+    .soft-tag{display:inline-block;font-family:'Space Mono',monospace;font-size:9px;color:#4A4A4A;border:1px solid #333;padding:3px 8px;border-radius:2px;margin-bottom:14px;margin-right:6px}
+    .music-wrap{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+    @media(max-width:768px){.music-wrap{grid-template-columns:1fr}}
+    .music-links{display:flex;flex-direction:column;gap:14px}
+    .music-btn{display:flex;align-items:center;gap:10px;font-family:'Press Start 2P',monospace;font-size:9px;padding:14px 18px;border:1px solid #333;border-radius:2px;transition:border-color .2s,transform .2s}
+    .music-btn:hover{transform:translateX(4px);border-color:#A855F7}
+    .spotify-embed{border-radius:8px;overflow:hidden;border:1px solid #1A1A1A}
     .about-section{background:#0A0A0F;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:40px 40px}
     .about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:start}
     @media(max-width:768px){.about-grid{grid-template-columns:1fr}}
@@ -101,6 +109,10 @@
     .social-btn.red:hover{background:#FF2D2D;color:#fff}
     .social-btn.white{border-color:#F0F0F0;color:#F0F0F0;background:transparent}
     .social-btn.white:hover{background:#F0F0F0;color:#000}
+    .social-btn.purple{border-color:#A855F7;color:#A855F7;background:transparent}
+    .social-btn.purple:hover{background:#A855F7;color:#fff}
+    .social-btn.green{border-color:#00FF88;color:#00FF88;background:transparent}
+    .social-btn.green:hover{background:#00FF88;color:#000}
     .footer-line{max-width:400px;height:1px;background:#1A1A1A;margin:0 auto 24px}
     .footer-text{font-family:'Space Mono',monospace;font-size:9px;color:#4A4A4A;text-transform:uppercase;letter-spacing:1px;line-height:1.8}
     .footer-pixels{display:flex;justify-content:center;gap:6px;margin-top:16px}
@@ -120,9 +132,11 @@
   <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Volver arriba">&#9650;</button>
 
   <nav class="site-nav">
-    <a href="#games">Juegos</a>
+    <a href="#games">Games</a>
+    <a href="#mobile">Mobile</a>
     <a href="#foko-soft">Foko Soft</a>
-    <a href="#about">Sobre Nosotros</a>
+    <a href="#music">F0K0 Music</a>
+    <a href="#about">Nosotros</a>
     <a href="#contact">Contacto</a>
   </nav>
 
@@ -133,78 +147,133 @@
       <div class="stars stars-3"></div>
     </div>
     <div class="hero-content">
-      <p class="hero-tagline">ESTUDIO INDIE DE VIDEOJUEGOS</p>
+      <p class="hero-tagline">GAMES &middot; SOFT &middot; MUSIC</p>
       <h1 class="hero-title">FOKO GAMES</h1>
-      <div class="nes-loader">
-        <div class="pixel-dot"></div>
-        <div class="pixel-dot"></div>
-        <div class="pixel-dot"></div>
-      </div>
-      <p class="hero-subtitle">NES Homebrew &middot; Unity &middot; Mobile &middot; Pixel Art</p>
+      <p class="hero-subtitle">NES Homebrew &middot; Unity &middot; Android &middot; Pixel Art &middot; Chiptune</p>
     </div>
-    <div class="scroll-indicator">
-      <span>SCROLL</span>
-      <div class="scroll-line"></div>
+    <div class="hub-grid">
+      <a href="#games" class="hub-card" style="--accent:#FF2D2D;--glow:rgba(255,45,45,.3)">
+        <h3>🎮 GAMES</h3>
+        <p>NES, Unity y NES Game Studio</p>
+      </a>
+      <a href="#mobile" class="hub-card" style="--accent:#00D4FF;--glow:rgba(0,212,255,.3)">
+        <h3>📱 MOBILE</h3>
+        <p>Nuestros juegos en Android</p>
+      </a>
+      <a href="#foko-soft" class="hub-card" style="--accent:#00FF88;--glow:rgba(0,255,136,.3)">
+        <h3>🛠️ FOKO SOFT</h3>
+        <p>ImpreContaAR y proyectos IoT</p>
+      </a>
+      <a href="#music" class="hub-card" style="--accent:#A855F7;--glow:rgba(168,85,247,.3)">
+        <h3>🎵 F0K0 MUSIC</h3>
+        <p>Chiptune, IA y producci&oacute;n original</p>
+      </a>
     </div>
   </section>
 
   <section id="games" style="background:linear-gradient(to bottom,#050505,#0A0A0F)">
     <div class="section">
       <div class="section-header">
-        <h2 class="section-title">NUESTROS JUEGOS</h2>
+        <h2 class="section-title">FOKO GAMES</h2>
         <div class="section-line"></div>
+        <p class="section-subtitle">JUEGOS Y HERRAMIENTAS PARA NES, UNITY Y ANDROID</p>
       </div>
       <div class="games-grid">
-        <article class="game-card" style="--accent:#FF2D2D;--accent-glow:rgba(255,45,45,0.3)" data-delay="0">
+        <article class="game-card featured" style="--accent:#00FF88;--accent-glow:rgba(0,255,136,0.35)" data-delay="0">
+          <div class="game-image"><img src="nesgamestudio.png" alt="NES Game Studio" loading="lazy"></div>
+          <div class="game-body">
+            <div class="game-title-row">
+              <h3 class="game-title">NES GAME STUDIO</h3>
+              <span class="game-badge" style="background:#00FF88">NUEVO</span>
+            </div>
+            <p class="game-genre" style="color:#00FF88">MOTOR &middot; EDITOR NES</p>
+            <p class="game-desc">Cre&aacute; un juego completo de NES real desde el navegador, sin programar: arte, mundo, reglas, m&uacute;sica y exportaci&oacute;n directa a un archivo .nes jugable.</p>
+            <p class="game-platforms">BROWSER &middot; EXPORTA .NES</p>
+            <a href="https://foko-games.itch.io/nes-game-studio" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#00FF88;color:#000">PROBAR AHORA</a>
+            <p class="press-badge">📰 Cobertura en prensa retro &middot; <a href="https://foko-games.itch.io/nes-game-studio/devlog" target="_blank" rel="noopener noreferrer">Ver devlog</a></p>
+          </div>
+        </article>
+        <article class="game-card" style="--accent:#FF2D2D;--accent-glow:rgba(255,45,45,0.3)" data-delay="1">
           <div class="game-image"><img src="night-city-cover.jpg" alt="Night City" loading="lazy"></div>
           <div class="game-body">
             <div class="game-title-row"><h3 class="game-title">NIGHT CITY</h3></div>
             <p class="game-genre" style="color:#FF2D2D">ACTION &middot; PLATFORMER</p>
-            <p class="game-desc">Homebrew para NES programado desde cero en ensamblador 6502. 80 niveles distribuidos en 8 zonas tem&aacute;ticas, cada una con su propio jefe final.</p>
+            <p class="game-desc">Homebrew para NES programado desde cero en ensamblador 6502. 80 niveles en 8 zonas tem&aacute;ticas, cada una con su jefe final.</p>
             <p class="game-platforms">NES &middot; EMULADOR</p>
-            <a href="https://foko-games.itch.io/nigth-city" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#FF2D2D">JUGAR <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
+            <a href="https://foko-games.itch.io/nigth-city" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#FF2D2D">JUGAR</a>
           </div>
         </article>
-        <article class="game-card" style="--accent:#00D4FF;--accent-glow:rgba(0,212,255,0.3)" data-delay="1">
+        <article class="game-card" style="--accent:#00D4FF;--accent-glow:rgba(0,212,255,0.3)" data-delay="2">
           <div class="game-image"><img src="invaders-cover.jpg" alt="Foko Games Invaders" loading="lazy"></div>
           <div class="game-body">
             <div class="game-title-row"><h3 class="game-title">FOKO GAMES INVADERS</h3></div>
             <p class="game-genre" style="color:#00D4FF">SHOOTER &middot; ARCADE</p>
-            <p class="game-desc">Shooter espacial retro para NES con motor propio en ca65. Olas de enemigos, power-ups y m&uacute;sica chiptune original compuesta para el juego.</p>
+            <p class="game-desc">Shooter espacial retro para NES con motor propio en ca65. Olas de enemigos, power-ups y m&uacute;sica chiptune original.</p>
             <p class="game-platforms">NES &middot; EMULADOR</p>
-            <a href="https://foko-games.itch.io/foko-games-invaders" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#00D4FF;color:#000">JUGAR <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
+            <a href="https://foko-games.itch.io/foko-games-invaders" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#00D4FF;color:#000">JUGAR</a>
           </div>
         </article>
-        <article class="game-card" style="--accent:#22C55E;--accent-glow:rgba(34,197,94,0.3)" data-delay="2">
+        <article class="game-card" style="--accent:#22C55E;--accent-glow:rgba(34,197,94,0.3)" data-delay="3">
           <div class="game-image"><img src="pcsoccer-cover.jpg" alt="PC Soccer NES" loading="lazy"></div>
           <div class="game-body">
             <div class="game-title-row"><h3 class="game-title">PC SOCCER NES</h3></div>
             <p class="game-genre" style="color:#22C55E">SPORTS &middot; ARCADE</p>
-            <p class="game-desc">F&uacute;tbol 7 contra 7 en cancha vertical con scroll y c&aacute;mara que sigue la pelota. Control simple de 2 botones: pas&aacute;s o pate&aacute;s.</p>
+            <p class="game-desc">F&uacute;tbol 7 contra 7 en cancha vertical con scroll y c&aacute;mara que sigue la pelota. Control simple de 2 botones.</p>
             <p class="game-platforms">NES &middot; EMULADOR</p>
-            <a href="https://foko-games.itch.io/pc-soccer-nes" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#22C55E">JUGAR <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
+            <a href="https://foko-games.itch.io/pc-soccer-nes" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#22C55E">JUGAR</a>
           </div>
         </article>
-        <article class="game-card" style="--accent:#A855F7;--accent-glow:rgba(168,85,247,0.3)" data-delay="3">
+        <article class="game-card" style="--accent:#A855F7;--accent-glow:rgba(168,85,247,0.3)" data-delay="4">
           <div class="game-image"><img src="heroes-cover.jpg" alt="Heroes of Darklight" loading="lazy"></div>
           <div class="game-body">
             <div class="game-title-row"><h3 class="game-title">HEROES OF DARKLIGHT</h3></div>
             <p class="game-genre" style="color:#A855F7">ADVENTURE &middot; PUZZLE</p>
-            <p class="game-desc">Acci&oacute;n y puzzles con est&eacute;tica pixel art desarrollado en Unity. Manag&aacute; las habilidades de tu equipo y plant&aacute; cara a jefes con mec&aacute;nicas &uacute;nicas.</p>
+            <p class="game-desc">Acci&oacute;n y puzzles con est&eacute;tica pixel art desarrollado en Unity. Manag&aacute; habilidades y plant&aacute; cara a jefes &uacute;nicos.</p>
             <p class="game-platforms">WINDOWS &middot; MAC &middot; LINUX</p>
-            <a href="https://foko-games.itch.io/heroes-of-darkligth" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#A855F7">JUGAR <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
+            <a href="https://foko-games.itch.io/heroes-of-darkligth" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#A855F7">JUGAR</a>
           </div>
         </article>
-        <article class="game-card" style="--accent:#EC4899;--accent-glow:rgba(236,72,153,0.3)" data-delay="4">
+        <article class="game-card" style="--accent:#EC4899;--accent-glow:rgba(236,72,153,0.3)" data-delay="5">
           <div class="game-image"><img src="pixelcandyball-cover.jpg" alt="Pixel Candy Ball" loading="lazy"></div>
           <div class="game-body">
             <div class="game-title-row"><h3 class="game-title">PIXEL CANDY BALL</h3><span class="game-badge">FREE</span></div>
             <p class="game-genre" style="color:#EC4899">PUZZLE &middot; CASUAL</p>
-            <p class="game-desc">Puzzle casual desarrollado en Unity. Colores vibrantes, mec&aacute;nicas adictivas y ritmo ideal para partidas cortas desde el navegador.</p>
+            <p class="game-desc">Puzzle casual desarrollado en Unity. Colores vibrantes, mec&aacute;nicas adictivas, ideal para partidas cortas.</p>
             <p class="game-platforms">BROWSER</p>
-            <a href="https://foko-games.itch.io/pixelcandyball" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#EC4899">JUGAR <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
+            <a href="https://foko-games.itch.io/pixelcandyball" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#EC4899">JUGAR</a>
           </div>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="mobile" style="background:#0A0A0F">
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title" style="color:#00D4FF">FOKO MOBILE</h2>
+        <div class="section-line" style="background:linear-gradient(to right,#00D4FF,#A855F7)"></div>
+        <p class="section-subtitle">NUESTROS JUEGOS EN ANDROID &middot; M&Aacute;S EN CAMINO</p>
+      </div>
+      <div class="games-grid">
+        <article class="game-card" style="--accent:#A855F7;--accent-glow:rgba(168,85,247,0.3)">
+          <div class="game-body">
+            <div class="game-title-row"><h3 class="game-title">HEROES OF DARKLIGHT</h3><span class="game-badge">ANDROID</span></div>
+            <p class="game-genre" style="color:#A855F7">ADVENTURE &middot; PUZZLE</p>
+            <p class="game-desc">Versi&oacute;n m&oacute;vil de nuestro t&iacute;tulo de Unity, con controles adaptados para pantalla t&aacute;ctil.</p>
+            <p class="game-platforms">GOOGLE PLAY</p>
+          </div>
+        </article>
+        <article class="game-card" style="--accent:#22C55E;--accent-glow:rgba(34,197,94,0.3)">
+          <div class="game-body">
+            <div class="game-title-row"><h3 class="game-title">PC SOCCER (GESTI&Oacute;N)</h3><span class="game-badge">PR&Oacute;XIMO</span></div>
+            <p class="game-genre" style="color:#22C55E">MANAGER &middot; SPORTS</p>
+            <p class="game-desc">Simulador de gesti&oacute;n de equipos estilo PC F&uacute;tbol, en desarrollo para Android.</p>
+            <p class="game-platforms">PR&Oacute;XIMAMENTE</p>
+          </div>
+        </article>
+      </div>
+      <div style="text-align:center;margin-top:32px">
+        <a href="https://play.google.com/store/apps/developer?id=Foko+Games" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#00D4FF;color:#000;display:inline-block">VER EN GOOGLE PLAY</a>
       </div>
     </div>
   </section>
@@ -214,23 +283,41 @@
       <div class="section-header">
         <h2 class="section-title" style="color:#00FF88">FOKO SOFT</h2>
         <div class="section-line" style="background:linear-gradient(to right,#00FF88,#00D4FF)"></div>
-        <p class="section-subtitle">HERRAMIENTAS Y EDITORES PARA CREADORES DE NES</p>
+        <p class="section-subtitle">SOFTWARE Y PROYECTOS IOT</p>
       </div>
-      <div class="games-grid">
-        <article class="game-card" style="--accent:#00FF88;--accent-glow:rgba(0,255,136,0.3)" data-delay="0">
-          <div class="game-image"><img src="nesgamestudio.png" alt="NES Game Studio" loading="lazy"></div>
-          <div class="game-body">
-            <div class="game-title-row">
-              <h3 class="game-title">NES GAME STUDIO</h3>
-              <span class="game-badge" style="background:#00FF88">NUEVO</span>
-            </div>
-            <p class="game-genre" style="color:#00FF88">EDITOR &middot; HERRAMIENTA</p>
-            <p class="game-desc">Cre&aacute; un juego completo de NES real desde el navegador, sin programar: arte, mundo, reglas, m&uacute;sica y exportaci&oacute;n directa a un archivo .nes jugable.</p>
-            <p class="game-platforms">BROWSER &middot; EXPORTA .NES</p>
-            <a href="https://foko-games.itch.io/nes-game-studio" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#00FF88;color:#000">PROBAR AHORA <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
-            <p class="press-badge">📰 Cobertura en prensa retro &middot; <a href="https://foko-games.itch.io/nes-game-studio/devlog" target="_blank" rel="noopener noreferrer">Ver devlog</a></p>
-          </div>
-        </article>
+      <div class="soft-grid">
+        <div class="soft-card">
+          <h3>IMPRECONTAAR</h3>
+          <span class="soft-tag">SOFTWARE</span><span class="soft-tag">GESTI&Oacute;N</span>
+          <p>Herramienta para facturaci&oacute;n y gesti&oacute;n contable, con c&oacute;digo abierto disponible en GitHub.</p>
+          <a href="https://github.com/emicaim/ImpreContaAR" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#00FF88;color:#000">VER EN GITHUB</a>
+        </div>
+        <div class="soft-card">
+          <h3>PROYECTOS IOT</h3>
+          <span class="soft-tag">HARDWARE</span><span class="soft-tag">IOT</span>
+          <p>Experimentos y desarrollos personales de Internet de las Cosas, documentados en mi perfil profesional.</p>
+          <a href="#" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#00D4FF;color:#000">VER EN LINKEDIN</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="music" style="background:#0A0A0F">
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title" style="color:#A855F7">F0K0 MUSIC</h2>
+        <div class="section-line" style="background:linear-gradient(to right,#A855F7,#EC4899)"></div>
+        <p class="section-subtitle">CHIPTUNE, PRODUCCI&Oacute;N ORIGINAL Y EXPERIMENTOS CON IA</p>
+      </div>
+      <div class="music-wrap">
+        <div class="spotify-embed">
+          <iframe src="https://open.spotify.com/embed/artist/2LNf8IccRLw2vZCV9PhG3g" width="100%" height="380" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+        <div class="music-links">
+          <a href="https://open.spotify.com/artist/2LNf8IccRLw2vZCV9PhG3g" target="_blank" rel="noopener noreferrer" class="music-btn" style="border-color:#1DB954;color:#1DB954">🎧 ESCUCHAR EN SPOTIFY</a>
+          <a href="https://suno.com/@fokomusic" target="_blank" rel="noopener noreferrer" class="music-btn" style="border-color:#A855F7;color:#A855F7">🤖 EXPLORAR EN SUNO</a>
+          <a href="https://www.youtube.com/@f0k0music" target="_blank" rel="noopener noreferrer" class="music-btn" style="border-color:#FF0000;color:#FF0000">▶ VER EN YOUTUBE</a>
+        </div>
       </div>
     </div>
   </section>
@@ -245,14 +332,14 @@
         <div class="stats-grid">
           <div class="stat-item"><div class="stat-value" style="color:#FF2D2D">6+</div><div class="stat-label">JUEGOS</div></div>
           <div class="stat-item"><div class="stat-value" style="color:#00D4FF">2019</div><div class="stat-label">DESDE</div></div>
-          <div class="stat-item"><div class="stat-value" style="color:#F5A623">NES</div><div class="stat-label">HOMEBREW</div></div>
           <div class="stat-item"><div class="stat-value" style="color:#00FF88">SOFT</div><div class="stat-label">FOKO SOFT</div></div>
+          <div class="stat-item"><div class="stat-value" style="color:#A855F7">F0K0</div><div class="stat-label">M&Uacute;SICA</div></div>
         </div>
         <div class="about-text">
-          <p><strong style="color:#F5A623">Foko Games</strong> es un estudio indie espa&ntilde;ol que desarrolla videojuegos en distintas plataformas: desde homebrew para <strong style="color:#FF2D2D">NES</strong> programado en ensamblador 6502 hasta juegos m&oacute;viles para <strong style="color:#00D4FF">Android</strong> y t&iacute;tulos de escritorio con <strong style="color:#A855F7">Unity</strong>.</p>
-          <p>Nuestros juegos para NES se programan desde cero en <strong style="color:#00D4FF">ensamblador 6502</strong>, el mismo lenguaje de la consola original, para garantizar una experiencia 100% aut&eacute;ntica tanto en hardware real como en emuladores.</p>
-          <p>Bajo <strong style="color:#00FF88">Foko Soft</strong> agrupamos nuestras herramientas para creadores, como <strong style="color:#00FF88">NES Game Studio</strong>, un editor que permite dise&ntilde;ar y exportar juegos de NES reales sin escribir una l&iacute;nea de c&oacute;digo.</p>
-          <p>En mobile desarrollamos con <strong style="color:#EC4899">React Native y Capacitor</strong>, apuntando a experiencias limpias, sin publicidad y sin registro. Cada juego, sin importar la plataforma, es una apuesta honesta por el pixel art y las mec&aacute;nicas que no pasan de moda.</p>
+          <p><strong style="color:#F5A623">Foko Games</strong> es un estudio indie espa&ntilde;ol que desarrolla videojuegos en distintas plataformas: desde homebrew para <strong style="color:#FF2D2D">NES</strong> en ensamblador 6502 hasta juegos m&oacute;viles para <strong style="color:#00D4FF">Android</strong> y t&iacute;tulos de escritorio con <strong style="color:#A855F7">Unity</strong>.</p>
+          <p>Con <strong style="color:#00FF88">NES Game Studio</strong> llevamos esa pasi&oacute;n un paso m&aacute;s all&aacute;: un editor que permite a cualquiera crear su propio juego de NES real desde el navegador, sin escribir c&oacute;digo.</p>
+          <p>Bajo <strong style="color:#00FF88">Foko Soft</strong> desarrollamos herramientas y proyectos personales como <strong style="color:#00FF88">ImpreContaAR</strong> y experimentos de IoT, aplicando la misma l&oacute;gica de resolver problemas reales con software.</p>
+          <p>Y como <strong style="color:#A855F7">F0K0</strong>, exploramos la m&uacute;sica: chiptune, producci&oacute;n original y experimentos con IA, disponible en Spotify, Suno y YouTube.</p>
           <p class="about-signature">&mdash; FOKO GAMES</p>
         </div>
       </div>
@@ -261,14 +348,12 @@
 
   <section class="contact-section" id="contact">
     <h2 class="contact-title">&iexcl;SEGUINOS!</h2>
-    <p class="contact-desc">Descarg&aacute; nuestros juegos y unite a la comunidad.</p>
+    <p class="contact-desc">Descarg&aacute; nuestros juegos, prob&aacute; nuestro software y escuch&aacute; nuestra m&uacute;sica.</p>
     <div class="social-links">
-      <a href="https://foko-games.itch.io" target="_blank" rel="noopener noreferrer" class="social-btn red">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 12c0-1.1.9-2 2-2h2v10H5c-1.1 0-2-.9-2-2v-6zm7-2h4v10h-4V10zm6 0h2c1.1 0 2 .9 2 2v6c0 1.1-.9 2-2 2h-2V10zM7 3h10v4H7V3z"/></svg> itch.io
-      </a>
-      <a href="https://github.com/emicaim" target="_blank" rel="noopener noreferrer" class="social-btn white">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> GitHub
-      </a>
+      <a href="https://foko-games.itch.io" target="_blank" rel="noopener noreferrer" class="social-btn red">itch.io</a>
+      <a href="https://play.google.com/store/apps/developer?id=Foko+Games" target="_blank" rel="noopener noreferrer" class="social-btn white">Google Play</a>
+      <a href="https://github.com/emicaim" target="_blank" rel="noopener noreferrer" class="social-btn green">GitHub</a>
+      <a href="https://open.spotify.com/artist/2LNf8IccRLw2vZCV9PhG3g" target="_blank" rel="noopener noreferrer" class="social-btn purple">Spotify</a>
     </div>
     <div class="footer-line"></div>
     <p class="footer-text">&copy; 2026 FOKO GAMES. HECHO CON P&Iacute;XELES Y PASI&Oacute;N.</p>
@@ -293,8 +378,8 @@
       if(!c||window.matchMedia('(pointer:coarse)').matches)return;
       var mx=0,my=0,cx=0,cy=0;
       document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});
-      document.addEventListener('mouseover',function(e){if(e.target.closest('a,button,.game-card'))c.classList.add('hover')});
-      document.addEventListener('mouseout',function(e){if(e.target.closest('a,button,.game-card'))c.classList.remove('hover')});
+      document.addEventListener('mouseover',function(e){if(e.target.closest('a,button,.game-card,.hub-card'))c.classList.add('hover')});
+      document.addEventListener('mouseout',function(e){if(e.target.closest('a,button,.game-card,.hub-card'))c.classList.remove('hover')});
       function anim(){cx+=(mx-cx)*.15;cy+=(my-cy)*.15;var s=c.classList.contains('hover')?8:6;c.style.transform='translate('+(cx-s)+'px,'+(cy-s)+'px)';requestAnimationFrame(anim);}
       anim();
     })();
@@ -304,7 +389,7 @@
     })();
     (function(){
       var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
-      document.querySelectorAll('.game-card').forEach(function(el,i){el.style.transitionDelay=(i*.15)+'s';o.observe(el)});
+      document.querySelectorAll('.game-card').forEach(function(el,i){el.style.transitionDelay=(i*.1)+'s';o.observe(el)});
       document.querySelectorAll('.stat-item').forEach(function(el,i){el.style.transitionDelay=(i*.1)+'s';o.observe(el)});
       document.querySelectorAll('.about-text').forEach(function(el){o.observe(el)});
     })();
