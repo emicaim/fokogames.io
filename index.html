@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Foko Games — Indie Game Studio</title>
   <meta name="description" content="Estudio indie de videojuegos. Juegos para NES en ensamblador 6502, juegos móviles para Android y juegos de escritorio con Unity. Pixel art, acción y puzzles." />
+  <meta property="og:title" content="Foko Games — Indie Game Studio" />
+  <meta property="og:description" content="Juegos NES en ensamblador 6502, mobile y Unity. Descubre NES Game Studio, nuestro editor para crear juegos de NES en el navegador." />
+  <meta property="og:image" content="nesgamestudio.png" />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -47,10 +51,14 @@
     .scroll-indicator span{font-family:'Space Mono',monospace;font-size:9px;color:#4A4A4A;letter-spacing:3px}
     .scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,#4A4A4A,transparent)}
     @keyframes fadeInUp{to{opacity:1;transform:translateY(0)}}
+    .site-nav{position:fixed;top:0;left:0;width:100%;z-index:200;display:flex;justify-content:center;gap:24px;padding:14px 20px;background:rgba(5,5,5,.85);backdrop-filter:blur(6px);border-bottom:1px solid #1A1A1A;flex-wrap:wrap}
+    .site-nav a{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8A8A8A;transition:color .2s}
+    .site-nav a:hover{color:#F5A623}
     .section{padding:80px 5vw;max-width:1400px;margin:0 auto}
     .section-header{text-align:center;margin-bottom:48px}
     .section-title{font-family:'Press Start 2P',monospace;font-size:clamp(1rem,3vw,1.6rem);letter-spacing:3px;text-transform:uppercase;color:#F5A623}
     .section-line{margin:16px auto 0;width:60px;height:3px;background:linear-gradient(to right,#FF2D2D,#F5A623)}
+    .section-subtitle{font-family:'Space Mono',monospace;font-size:11px;color:#8A8A8A;margin-top:12px;letter-spacing:1px}
     .games-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
     .game-card{background:#0A0A0F;border:1px solid #1A1A1A;border-radius:4px;overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .3s;opacity:0;transform:translateY(40px)}
     .game-card.visible{opacity:1;transform:translateY(0);transition:opacity .6s ease,transform .6s ease,border-color .3s,box-shadow .3s}
@@ -68,6 +76,8 @@
     .game-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Press Start 2P',monospace;font-size:8px;padding:10px 20px;border-radius:2px;color:#fff;transition:transform .2s,box-shadow .2s;border:none}
     .game-btn:hover{transform:scale(1.05);box-shadow:0 0 15px var(--accent-glow)}
     .game-btn svg{width:10px;height:10px}
+    .press-badge{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:9px;color:#8A8A8A;margin-top:10px}
+    .press-badge a{color:#00FF88;text-decoration:underline}
     .about-section{background:#0A0A0F;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:40px 40px}
     .about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:start}
     @media(max-width:768px){.about-grid{grid-template-columns:1fr}}
@@ -101,13 +111,20 @@
     .scroll-top{position:fixed;bottom:20px;right:20px;z-index:50;font-family:'Press Start 2P',monospace;font-size:10px;padding:10px 14px;border:1px solid #333;background:#0A0A0F;color:#F0F0F0;border-radius:2px;transition:opacity .3s,border-color .3s;opacity:0;pointer-events:none}
     .scroll-top.visible{opacity:1;pointer-events:auto}
     .scroll-top:hover{border-color:#FF2D2D;color:#FF2D2D}
-    @media(max-width:640px){.games-grid{grid-template-columns:1fr}.section{padding:60px 4vw}.stats-grid{gap:16px}}
+    @media(max-width:640px){.games-grid{grid-template-columns:1fr}.section{padding:60px 4vw}.stats-grid{gap:16px}.site-nav{gap:14px}}
   </style>
 </head>
 <body>
   <div class="crt-overlay" aria-hidden="true"></div>
   <div class="pixel-cursor" id="cursor" aria-hidden="true"></div>
   <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Volver arriba">&#9650;</button>
+
+  <nav class="site-nav">
+    <a href="#games">Juegos</a>
+    <a href="#foko-soft">Foko Soft</a>
+    <a href="#about">Sobre Nosotros</a>
+    <a href="#contact">Contacto</a>
+  </nav>
 
   <section class="hero" id="hero">
     <div class="starfield">
@@ -158,7 +175,17 @@
             <a href="https://foko-games.itch.io/foko-games-invaders" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#00D4FF;color:#000">JUGAR <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
           </div>
         </article>
-        <article class="game-card" style="--accent:#A855F7;--accent-glow:rgba(168,85,247,0.3)" data-delay="2">
+        <article class="game-card" style="--accent:#22C55E;--accent-glow:rgba(34,197,94,0.3)" data-delay="2">
+          <div class="game-image"><img src="pcsoccer-cover.jpg" alt="PC Soccer NES" loading="lazy"></div>
+          <div class="game-body">
+            <div class="game-title-row"><h3 class="game-title">PC SOCCER NES</h3></div>
+            <p class="game-genre" style="color:#22C55E">SPORTS &middot; ARCADE</p>
+            <p class="game-desc">F&uacute;tbol 7 contra 7 en cancha vertical con scroll y c&aacute;mara que sigue la pelota. Control simple de 2 botones: pas&aacute;s o pate&aacute;s.</p>
+            <p class="game-platforms">NES &middot; EMULADOR</p>
+            <a href="https://foko-games.itch.io/pc-soccer-nes" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#22C55E">JUGAR <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
+          </div>
+        </article>
+        <article class="game-card" style="--accent:#A855F7;--accent-glow:rgba(168,85,247,0.3)" data-delay="3">
           <div class="game-image"><img src="heroes-cover.jpg" alt="Heroes of Darklight" loading="lazy"></div>
           <div class="game-body">
             <div class="game-title-row"><h3 class="game-title">HEROES OF DARKLIGHT</h3></div>
@@ -168,7 +195,7 @@
             <a href="https://foko-games.itch.io/heroes-of-darkligth" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#A855F7">JUGAR <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
           </div>
         </article>
-        <article class="game-card" style="--accent:#EC4899;--accent-glow:rgba(236,72,153,0.3)" data-delay="3">
+        <article class="game-card" style="--accent:#EC4899;--accent-glow:rgba(236,72,153,0.3)" data-delay="4">
           <div class="game-image"><img src="pixelcandyball-cover.jpg" alt="Pixel Candy Ball" loading="lazy"></div>
           <div class="game-body">
             <div class="game-title-row"><h3 class="game-title">PIXEL CANDY BALL</h3><span class="game-badge">FREE</span></div>
@@ -176,6 +203,32 @@
             <p class="game-desc">Puzzle casual desarrollado en Unity. Colores vibrantes, mec&aacute;nicas adictivas y ritmo ideal para partidas cortas desde el navegador.</p>
             <p class="game-platforms">BROWSER</p>
             <a href="https://foko-games.itch.io/pixelcandyball" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#EC4899">JUGAR <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="foko-soft" style="background:#050505">
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title" style="color:#00FF88">FOKO SOFT</h2>
+        <div class="section-line" style="background:linear-gradient(to right,#00FF88,#00D4FF)"></div>
+        <p class="section-subtitle">HERRAMIENTAS Y EDITORES PARA CREADORES DE NES</p>
+      </div>
+      <div class="games-grid">
+        <article class="game-card" style="--accent:#00FF88;--accent-glow:rgba(0,255,136,0.3)" data-delay="0">
+          <div class="game-image"><img src="nesgamestudio.png" alt="NES Game Studio" loading="lazy"></div>
+          <div class="game-body">
+            <div class="game-title-row">
+              <h3 class="game-title">NES GAME STUDIO</h3>
+              <span class="game-badge" style="background:#00FF88">NUEVO</span>
+            </div>
+            <p class="game-genre" style="color:#00FF88">EDITOR &middot; HERRAMIENTA</p>
+            <p class="game-desc">Cre&aacute; un juego completo de NES real desde el navegador, sin programar: arte, mundo, reglas, m&uacute;sica y exportaci&oacute;n directa a un archivo .nes jugable.</p>
+            <p class="game-platforms">BROWSER &middot; EXPORTA .NES</p>
+            <a href="https://foko-games.itch.io/nes-game-studio" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#00FF88;color:#000">PROBAR AHORA <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
+            <p class="press-badge">📰 Cobertura en prensa retro &middot; <a href="https://foko-games.itch.io/nes-game-studio/devlog" target="_blank" rel="noopener noreferrer">Ver devlog</a></p>
           </div>
         </article>
       </div>
@@ -190,14 +243,15 @@
       </div>
       <div class="about-grid">
         <div class="stats-grid">
-          <div class="stat-item"><div class="stat-value" style="color:#FF2D2D">4+</div><div class="stat-label">JUEGOS</div></div>
+          <div class="stat-item"><div class="stat-value" style="color:#FF2D2D">6+</div><div class="stat-label">JUEGOS</div></div>
           <div class="stat-item"><div class="stat-value" style="color:#00D4FF">2019</div><div class="stat-label">DESDE</div></div>
           <div class="stat-item"><div class="stat-value" style="color:#F5A623">NES</div><div class="stat-label">HOMEBREW</div></div>
-          <div class="stat-item"><div class="stat-value" style="color:#A855F7">MOB</div><div class="stat-label">MOBILE</div></div>
+          <div class="stat-item"><div class="stat-value" style="color:#00FF88">SOFT</div><div class="stat-label">FOKO SOFT</div></div>
         </div>
         <div class="about-text">
           <p><strong style="color:#F5A623">Foko Games</strong> es un estudio indie espa&ntilde;ol que desarrolla videojuegos en distintas plataformas: desde homebrew para <strong style="color:#FF2D2D">NES</strong> programado en ensamblador 6502 hasta juegos m&oacute;viles para <strong style="color:#00D4FF">Android</strong> y t&iacute;tulos de escritorio con <strong style="color:#A855F7">Unity</strong>.</p>
           <p>Nuestros juegos para NES se programan desde cero en <strong style="color:#00D4FF">ensamblador 6502</strong>, el mismo lenguaje de la consola original, para garantizar una experiencia 100% aut&eacute;ntica tanto en hardware real como en emuladores.</p>
+          <p>Bajo <strong style="color:#00FF88">Foko Soft</strong> agrupamos nuestras herramientas para creadores, como <strong style="color:#00FF88">NES Game Studio</strong>, un editor que permite dise&ntilde;ar y exportar juegos de NES reales sin escribir una l&iacute;nea de c&oacute;digo.</p>
           <p>En mobile desarrollamos con <strong style="color:#EC4899">React Native y Capacitor</strong>, apuntando a experiencias limpias, sin publicidad y sin registro. Cada juego, sin importar la plataforma, es una apuesta honesta por el pixel art y las mec&aacute;nicas que no pasan de moda.</p>
           <p class="about-signature">&mdash; FOKO GAMES</p>
         </div>
@@ -212,7 +266,7 @@
       <a href="https://foko-games.itch.io" target="_blank" rel="noopener noreferrer" class="social-btn red">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 12c0-1.1.9-2 2-2h2v10H5c-1.1 0-2-.9-2-2v-6zm7-2h4v10h-4V10zm6 0h2c1.1 0 2 .9 2 2v6c0 1.1-.9 2-2 2h-2V10zM7 3h10v4H7V3z"/></svg> itch.io
       </a>
-      <a href="#" class="social-btn white">
+      <a href="https://github.com/emicaim" target="_blank" rel="noopener noreferrer" class="social-btn white">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> GitHub
       </a>
     </div>
@@ -225,6 +279,7 @@
       <div class="footer-pixel" style="background:#00D4FF"></div>
       <div class="footer-pixel" style="background:#A855F7"></div>
       <div class="footer-pixel" style="background:#EC4899"></div>
+      <div class="footer-pixel" style="background:#00FF88"></div>
     </div>
     <div class="privacy-links">
       <a href="hodPrivacy.html">Pol&iacute;tica de Privacidad</a>
