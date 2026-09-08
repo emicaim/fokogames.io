@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Foko  — Games, Soft &amp; Music</title>
-  <meta name="description" content="Foko: estudio indie de videojuegos NES/Unity/Android, software (ImpreContaAR, IoT) y música original bajo el proyecto F0K0." />
+  <meta name="description" content="Foko: estudio indie de videojuegos para NES, ZX Spectrum, DOS, Unity y Android, software (ImpreContaAR, IoT) y música original bajo el proyecto F0K0." />
   <meta property="og:title" content="Foko — Games, Soft & Music" />
-  <meta property="og:description" content="Juegos NES, mobile y Unity, software con ImpreContaAR e IoT, y música original F0K0. Incluye NES Game Studio, nuestro editor de juegos NES en el navegador." />
+  <meta property="og:description" content="Juegos para NES, ZX Spectrum, DOS, mobile y Unity, software con ImpreContaAR e IoT, y música original F0K0. Incluye NES Game Studio y ZXS-Maker, nuestros editores en el navegador." />
   <meta property="og:image" content="nesgamestudio.png" />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,29 +18,37 @@
     body{background:#050505;color:#F0F0F0;font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;line-height:1.6}
     a{text-decoration:none;color:inherit}
     img{max-width:100%;display:block}
-    body{cursor:none}
-    *{cursor:none}
-    .pixel-cursor{position:fixed;top:0;left:0;width:12px;height:12px;background:#FF2D2D;pointer-events:none;z-index:10000;transition:background .2s,width .2s,height .2s}
-    .pixel-cursor.hover{background:#F5A623;width:16px;height:16px}
-    @media(pointer:coarse){.pixel-cursor{display:none!important}body,*{cursor:auto!important}}
-    .crt-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;opacity:.35;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 4px)}
+    /* El cursor nativo solo se oculta si el JS confirmo puntero fino: si el script falla, el raton sigue visible */
+    html.pixel-cursor-on,html.pixel-cursor-on *{cursor:none}
+    .pixel-cursor{position:fixed;top:0;left:0;width:12px;height:12px;margin:-6px 0 0 -6px;background:#FF2D2D;pointer-events:none;z-index:10000;opacity:0;will-change:transform;contain:strict;transition:background-color .15s ease,box-shadow .15s ease,opacity .15s ease}
+    .pixel-cursor.active{opacity:1}
+    /* hover sin cambiar width/height: evita reflow en cada entrada/salida */
+    .pixel-cursor.hover{background:#F5A623;box-shadow:0 0 0 4px rgba(245,166,35,.22)}
+    @media(pointer:coarse){.pixel-cursor{display:none!important}}
+    .crt-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;opacity:.35;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 4px);transform:translateZ(0);will-change:transform;contain:strict}
     ::-webkit-scrollbar{width:6px}
     ::-webkit-scrollbar-track{background:#050505}
     ::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
     ::-webkit-scrollbar-thumb:hover{background:#FF2D2D}
-    .starfield{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:0}
-    .stars{position:absolute;top:0;left:0;width:100%;height:200%;background:transparent}
-    .stars-1{width:2px;height:2px;background:transparent;box-shadow:50px 80px #fff,120px 200px #fff,300px 150px #fff,450px 300px #fff,600px 100px #fff,750px 250px #fff,900px 180px #fff,1050px 350px #fff,200px 400px #fff,350px 500px #fff,500px 450px #fff,650px 550px #fff,800px 480px #fff,950px 600px #fff,1100px 520px #fff,150px 650px #fff,400px 700px #fff,550px 750px #fff,700px 680px #fff,850px 800px #fff,100px 900px #fff,250px 850px #fff,480px 950px #fff,620px 880px #fff,780px 980px #fff,920px 920px #fff,1080px 1050px #fff,180px 1100px #fff,380px 1200px #fff,530px 1150px #fff,720px 1250px #fff,880px 1180px #fff,1020px 1300px #fff,130px 1350px #fff,320px 1400px #fff,580px 1380px #fff,680px 1450px #fff,830px 1420px #fff,980px 1480px #fff,1150px 1500px #fff,70px 1550px #fff,420px 1600px #fff,560px 1580px #fff,770px 1650px #fff,930px 1620px #fff,1120px 1700px #fff,30px 1750px #fff,260px 1800px #fff,470px 1780px #fff,640px 1850px #fff,860px 1820px #fff,1030px 1880px #fff;animation:starfield-scroll 120s linear infinite}
-    .stars-2{width:3px;height:3px;background:transparent;box-shadow:100px 150px rgba(255,255,255,.7),250px 300px rgba(255,255,255,.7),400px 100px rgba(255,255,255,.7),550px 450px rgba(255,255,255,.7),700px 250px rgba(255,255,255,.7),850px 500px rgba(255,255,255,.7),1000px 200px rgba(255,255,255,.7),1150px 400px rgba(255,255,255,.7),150px 550px rgba(255,255,255,.7),350px 650px rgba(255,255,255,.7),600px 700px rgba(255,255,255,.7),800px 600px rgba(255,255,255,.7),950px 750px rgba(255,255,255,.7),1100px 850px rgba(255,255,255,.7),200px 950px rgba(255,255,255,.7),450px 900px rgba(255,255,255,.7),750px 1050px rgba(255,255,255,.7),900px 1000px rgba(255,255,255,.7),50px 1200px rgba(255,255,255,.7),300px 1150px rgba(255,255,255,.7),500px 1250px rgba(255,255,255,.7),650px 1300px rgba(255,255,255,.7),820px 1350px rgba(255,255,255,.7),1050px 1280px rgba(255,255,255,.7);animation:starfield-scroll 180s linear infinite}
-    .stars-3{width:2px;height:2px;background:transparent;box-shadow:180px 250px rgba(255,255,255,.4),380px 400px rgba(255,255,255,.4),580px 200px rgba(255,255,255,.4),780px 550px rgba(255,255,255,.4),980px 350px rgba(255,255,255,.4),1180px 600px rgba(255,255,255,.4),280px 700px rgba(255,255,255,.4),480px 800px rgba(255,255,255,.4),680px 750px rgba(255,255,255,.4),880px 900px rgba(255,255,255,.4),1080px 950px rgba(255,255,255,.4),1280px 850px rgba(255,255,255,.4),130px 1100px rgba(255,255,255,.4),430px 1050px rgba(255,255,255,.4),630px 1200px rgba(255,255,255,.4),830px 1150px rgba(255,255,255,.4),1030px 1300px rgba(255,255,255,.4),1230px 1250px rgba(255,255,255,.4);animation:starfield-scroll 240s linear infinite}
-    @keyframes starfield-scroll{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+    .starfield{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:0;contain:strict}
+    /* Canvas: estrellas + naves. pointer-events:none para no robarle los clics a links y tarjetas. */
+    #heroCanvas{display:block;width:100%;height:100%;pointer-events:none}
+    .hud{position:absolute;top:64px;right:20px;z-index:11;pointer-events:none;text-align:right;font-family:'Press Start 2P',monospace;font-size:9px;line-height:2;letter-spacing:1px;text-shadow:0 0 8px rgba(0,0,0,.9)}
+    .hud-score{color:#F5A623}
+    .hud-hi{color:#8A8A8A;font-size:8px}
+    .hud-hint{color:#4A4A4A;font-size:7px;letter-spacing:1px;margin-top:6px;transition:opacity .6s ease}
+    .hud-hint.off{opacity:0}
+    @media(max-width:600px){.hud{top:58px;right:12px;font-size:8px}}
+    /* Mira sobre zona disparable del hero */
+    .pixel-cursor.aim{background:#00FF88;box-shadow:0 0 0 1px #050505,0 0 0 5px rgba(0,255,136,.35)}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
     .hero{position:relative;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:100px 20px 40px}
     .hero-content{position:relative;z-index:10;text-align:center;max-width:800px}
     .hero-tagline{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#00D4FF;margin-bottom:24px;opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease .3s forwards}
     .hero-title{font-family:'Press Start 2P',monospace;font-size:clamp(1.4rem,4vw,2.8rem);letter-spacing:4px;text-transform:uppercase;color:#F0F0F0;line-height:1.4;margin-bottom:8px;opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease .5s forwards}
     .hero-subtitle{font-family:'Inter',sans-serif;font-size:clamp(.8rem,2vw,1.1rem);color:#8A8A8A;margin-top:24px;opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease .9s forwards}
     @keyframes fadeInUp{to{opacity:1;transform:translateY(0)}}
-    .site-nav{position:fixed;top:0;left:0;width:100%;z-index:200;display:flex;justify-content:center;gap:22px;padding:14px 20px;background:rgba(5,5,5,.85);backdrop-filter:blur(6px);border-bottom:1px solid #1A1A1A;flex-wrap:wrap}
+    .site-nav{position:fixed;top:0;left:0;width:100%;z-index:200;display:flex;justify-content:center;gap:22px;padding:14px 20px;background:rgba(5,5,5,.94);border-bottom:1px solid #1A1A1A;flex-wrap:wrap}
     .site-nav a{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8A8A8A;transition:color .2s}
     .site-nav a:hover{color:#F5A623}
     .hub-grid{position:relative;z-index:10;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1000px;width:100%;margin-top:48px;opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease 1.1s forwards}
@@ -62,6 +70,8 @@
     .game-card.featured{border:1px solid var(--accent)}
     .game-image{overflow:hidden;aspect-ratio:16/10}
     .game-image img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+    /* Portadas verticales/4:3: anclar arriba para no cortar el titulo del juego */
+    .game-image img.top{object-position:top}
     .game-card:hover .game-image img{transform:scale(1.05)}
     .game-body{padding:20px}
     .game-title-row{display:flex;align-items:start;justify-content:space-between;gap:8px;margin-bottom:8px}
@@ -142,19 +152,22 @@
 
   <section class="hero" id="hero">
     <div class="starfield">
-      <div class="stars stars-1"></div>
-      <div class="stars stars-2"></div>
-      <div class="stars stars-3"></div>
+      <canvas id="heroCanvas" aria-hidden="true"></canvas>
+    </div>
+    <div class="hud" id="hud" aria-hidden="true">
+      <div class="hud-score">SCORE <span id="hudScore">0</span></div>
+      <div class="hud-hi">HI <span id="hudHi">0</span></div>
+      <div class="hud-hint" id="hudHint">CLIC PARA DISPARAR</div>
     </div>
     <div class="hero-content">
       <p class="hero-tagline">GAMES &middot; SOFT &middot; MUSIC</p>
       <h1 class="hero-title">FOKO</h1>
-      <p class="hero-subtitle">NES Homebrew &middot; Unity &middot; Android &middot; Pixel Art &middot; Chiptune</p>
+      <p class="hero-subtitle">NES &middot; ZX Spectrum &middot; DOS &middot; Unity &middot; Android &middot; Pixel Art &middot; Chiptune</p>
     </div>
     <div class="hub-grid">
       <a href="#games" class="hub-card" style="--accent:#FF2D2D;--glow:rgba(255,45,45,.3)">
         <h3>🎮 GAMES</h3>
-        <p>NES, ZX Spectrum, Unity y editores propios</p>
+        <p>NES, ZX Spectrum, DOS, Unity y editores propios</p>
       </a>
       <a href="#mobile" class="hub-card" style="--accent:#00D4FF;--glow:rgba(0,212,255,.3)">
         <h3>📱 MOBILE</h3>
@@ -176,11 +189,24 @@
       <div class="section-header">
         <h2 class="section-title">FOKO GAMES</h2>
         <div class="section-line"></div>
-        <p class="section-subtitle">JUEGOS Y HERRAMIENTAS PARA NES, ZX SPECTRUM, UNITY Y ANDROID</p>
+        <p class="section-subtitle">JUEGOS Y HERRAMIENTAS PARA NES, ZX SPECTRUM, DOS, UNITY Y ANDROID</p>
       </div>
       <div class="games-grid">
-        <article class="game-card featured" style="--accent:#00FF88;--accent-glow:rgba(0,255,136,0.35)" data-delay="0">
-          <div class="game-image"><img src="nesgamestudio.png" alt="NES Game Studio" loading="lazy"></div>
+        <article class="game-card featured" style="--accent:#FF7A00;--accent-glow:rgba(255,122,0,0.35)" data-delay="0">
+          <div class="game-image"><img class="top" src="fokoom-cover.jpg" alt="FOKOOM" loading="lazy" decoding="async"></div>
+          <div class="game-body">
+            <div class="game-title-row">
+              <h3 class="game-title">FOKOOM</h3>
+              <span class="game-badge" style="background:#FF7A00">NUEVO</span>
+            </div>
+            <p class="game-genre" style="color:#FF7A00">FPS &middot; RAYCASTER DOS</p>
+            <p class="game-desc">Un FPS estilo Wolfenstein en 50 KB de ensamblador x86 escrito a mano. Seis episodios de diez plantas, cuatro armas, quince tipos de enemigos con seis jefes, m&uacute;sica FM AdLib y efectos Sound Blaster. Demo gratuita de DOS Game Studio.</p>
+            <p class="game-platforms">DOS &middot; INCLUYE DOSBOX &middot; WINDOWS</p>
+            <a href="https://foko-games.itch.io/fokoom" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#FF7A00;color:#000">DESCARGAR</a>
+          </div>
+        </article>
+        <article class="game-card featured" style="--accent:#00FF88;--accent-glow:rgba(0,255,136,0.35)" data-delay="1">
+          <div class="game-image"><img src="nesgamestudio.png" alt="NES Game Studio" loading="lazy" decoding="async"></div>
           <div class="game-body">
             <div class="game-title-row">
               <h3 class="game-title">NES GAME STUDIO</h3>
@@ -194,7 +220,7 @@
           </div>
         </article>
         <article class="game-card featured" style="--accent:#F5A623;--accent-glow:rgba(245,166,35,0.35)" data-delay="1">
-          <div class="game-image"><img src="zxsmaker-cover.png" alt="ZXS-Maker" loading="lazy"></div>
+          <div class="game-image"><img src="zxsmaker-cover.png" alt="ZXS-Maker" loading="lazy" decoding="async"></div>
           <div class="game-body">
             <div class="game-title-row">
               <h3 class="game-title">ZXS-MAKER</h3>
@@ -206,8 +232,38 @@
             <a href="https://foko-games.itch.io/zxs-maker" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#F5A623;color:#000">PROBAR AHORA</a>
           </div>
         </article>
-        <article class="game-card" style="--accent:#FF2D2D;--accent-glow:rgba(255,45,45,0.3)" data-delay="2">
-          <div class="game-image"><img src="night-city-cover.jpg" alt="Night City" loading="lazy"></div>
+        <article class="game-card" style="--accent:#FACC15;--accent-glow:rgba(250,204,21,0.3)" data-delay="3">
+          <div class="game-image"><img class="top" src="duck-cover.png" alt="DUCK" loading="lazy" decoding="async"></div>
+          <div class="game-body">
+            <div class="game-title-row"><h3 class="game-title">DUCK</h3><span class="game-badge" style="background:#FACC15">NUEVO</span></div>
+            <p class="game-genre" style="color:#FACC15">SHOOTER &middot; ZAPPER NES</p>
+            <p class="game-desc">Caza de patos homebrew para NES: dos patos por ronda y solo tres balas para bajarlos. La velocidad sube en cada oleada a lo largo de 5 escenarios, del bosque de d&iacute;a a la ciudad de noche. Con modo aliado, donde disparar al pato equivocado cuesta una vida.</p>
+            <p class="game-platforms">NES &middot; EMULADOR</p>
+            <a href="https://foko-games.itch.io/duck" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#FACC15;color:#000">JUGAR</a>
+          </div>
+        </article>
+        <article class="game-card" style="--accent:#14B8A6;--accent-glow:rgba(20,184,166,0.3)" data-delay="4">
+          <div class="game-image"><img src="microban-cover.png" alt="Microban" loading="lazy" decoding="async"></div>
+          <div class="game-body">
+            <div class="game-title-row"><h3 class="game-title">MICROBAN</h3><span class="game-badge" style="background:#14B8A6">NUEVO</span></div>
+            <p class="game-genre" style="color:#14B8A6">PUZZLE &middot; SOKOBAN ISOM&Eacute;TRICO</p>
+            <p class="game-desc">El set cl&aacute;sico de David W. Skinner llevado al ZX Spectrum en vista isom&eacute;trica estilo Knight Lore. 55 puzzles en salas peque&ntilde;as hechas a mano: sin relojes, sin enemigos y sin azar, solo vos y las cajas.</p>
+            <p class="game-platforms">ZX SPECTRUM &middot; EMULADOR BROWSER &middot; .TAP</p>
+            <a href="https://foko-games.itch.io/microban" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#14B8A6;color:#000">JUGAR</a>
+          </div>
+        </article>
+        <article class="game-card" style="--accent:#818CF8;--accent-glow:rgba(129,140,248,0.3)" data-delay="5">
+          <div class="game-image"><img src="sokosoko-cover.png" alt="SokoSoko" loading="lazy" decoding="async"></div>
+          <div class="game-body">
+            <div class="game-title-row"><h3 class="game-title">SOKOSOKO</h3><span class="game-badge" style="background:#818CF8">NUEVO</span></div>
+            <p class="game-genre" style="color:#818CF8">PUZZLE &middot; ISOM&Eacute;TRICO</p>
+            <p class="game-desc">Puzzle isom&eacute;trico para ZX Spectrum jugable directo en el navegador, construido con nuestro propio ZXS-Maker. Pixel art cl&aacute;sico de Spectrum y descarga en .TAP en espa&ntilde;ol e ingl&eacute;s.</p>
+            <p class="game-platforms">ZX SPECTRUM &middot; EMULADOR BROWSER &middot; .TAP</p>
+            <a href="https://foko-games.itch.io/sokosoko" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#818CF8;color:#000">JUGAR</a>
+          </div>
+        </article>
+        <article class="game-card" style="--accent:#FF2D2D;--accent-glow:rgba(255,45,45,0.3)" data-delay="6">
+          <div class="game-image"><img src="night-city-cover.jpg" alt="Night City" loading="lazy" decoding="async"></div>
           <div class="game-body">
             <div class="game-title-row"><h3 class="game-title">NIGHT CITY</h3></div>
             <p class="game-genre" style="color:#FF2D2D">ACTION &middot; PLATFORMER</p>
@@ -217,7 +273,7 @@
           </div>
         </article>
         <article class="game-card" style="--accent:#00D4FF;--accent-glow:rgba(0,212,255,0.3)" data-delay="3">
-          <div class="game-image"><img src="invaders-cover.jpg" alt="Foko Games Invaders" loading="lazy"></div>
+          <div class="game-image"><img src="invaders-cover.jpg" alt="Foko Games Invaders" loading="lazy" decoding="async"></div>
           <div class="game-body">
             <div class="game-title-row"><h3 class="game-title">FOKO GAMES INVADERS</h3></div>
             <p class="game-genre" style="color:#00D4FF">SHOOTER &middot; ARCADE</p>
@@ -227,7 +283,7 @@
           </div>
         </article>
         <article class="game-card" style="--accent:#22C55E;--accent-glow:rgba(34,197,94,0.3)" data-delay="4">
-          <div class="game-image"><img src="pcsoccer-cover.jpg" alt="PC Soccer NES" loading="lazy"></div>
+          <div class="game-image"><img src="pcsoccer-cover.jpg" alt="PC Soccer NES" loading="lazy" decoding="async"></div>
           <div class="game-body">
             <div class="game-title-row"><h3 class="game-title">PC SOCCER NES</h3></div>
             <p class="game-genre" style="color:#22C55E">SPORTS &middot; ARCADE</p>
@@ -237,7 +293,7 @@
           </div>
         </article>
         <article class="game-card" style="--accent:#A855F7;--accent-glow:rgba(168,85,247,0.3)" data-delay="5">
-          <div class="game-image"><img src="heroes-cover.jpg" alt="Heroes of Darklight" loading="lazy"></div>
+          <div class="game-image"><img src="heroes-cover.jpg" alt="Heroes of Darklight" loading="lazy" decoding="async"></div>
           <div class="game-body">
             <div class="game-title-row"><h3 class="game-title">HEROES OF DARKLIGHT</h3></div>
             <p class="game-genre" style="color:#A855F7">ADVENTURE &middot; PUZZLE</p>
@@ -247,7 +303,7 @@
           </div>
         </article>
         <article class="game-card" style="--accent:#EC4899;--accent-glow:rgba(236,72,153,0.3)" data-delay="6">
-          <div class="game-image"><img src="pixelcandyball-cover.jpg" alt="Pixel Candy Ball" loading="lazy"></div>
+          <div class="game-image"><img src="pixelcandyball-cover.jpg" alt="Pixel Candy Ball" loading="lazy" decoding="async"></div>
           <div class="game-body">
             <div class="game-title-row"><h3 class="game-title">PIXEL CANDY BALL</h3><span class="game-badge">FREE</span></div>
             <p class="game-genre" style="color:#EC4899">PUZZLE &middot; CASUAL</p>
@@ -257,7 +313,7 @@
           </div>
         </article>
         <article class="game-card" style="--accent:#38BDF8;--accent-glow:rgba(56,189,248,0.3)" data-delay="7">
-          <div class="game-image"><img src="elfaro-cover.png" alt="El Faro de Sant Bru" loading="lazy"></div>
+          <div class="game-image"><img src="elfaro-cover.png" alt="El Faro de Sant Bru" loading="lazy" decoding="async"></div>
           <div class="game-body">
             <div class="game-title-row"><h3 class="game-title">EL FARO DE SANT BRU</h3></div>
             <p class="game-genre" style="color:#38BDF8">ADVENTURE &middot; ISOM&Eacute;TRICO</p>
@@ -267,7 +323,7 @@
           </div>
         </article>
         <article class="game-card" style="--accent:#94A3B8;--accent-glow:rgba(148,163,184,0.3)" data-delay="8">
-          <div class="game-image"><img src="lighthouse-cover.png" alt="The Lighthouse of Sant Bru" loading="lazy"></div>
+          <div class="game-image"><img src="lighthouse-cover.png" alt="The Lighthouse of Sant Bru" loading="lazy" decoding="async"></div>
           <div class="game-body">
             <div class="game-title-row"><h3 class="game-title">THE LIGHTHOUSE OF SANT BRU</h3></div>
             <p class="game-genre" style="color:#94A3B8">TEXT ADVENTURE &middot; MYSTERY</p>
@@ -372,13 +428,13 @@
       </div>
       <div class="about-grid">
         <div class="stats-grid">
-          <div class="stat-item"><div class="stat-value" style="color:#FF2D2D">9+</div><div class="stat-label">JUEGOS</div></div>
+          <div class="stat-item"><div class="stat-value" style="color:#FF2D2D">13+</div><div class="stat-label">JUEGOS</div></div>
           <div class="stat-item"><div class="stat-value" style="color:#00D4FF">2015</div><div class="stat-label">DESDE</div></div>
           <div class="stat-item"><div class="stat-value" style="color:#00FF88">SOFT</div><div class="stat-label">FOKO SOFT</div></div>
           <div class="stat-item"><div class="stat-value" style="color:#A855F7">F0K0</div><div class="stat-label">M&Uacute;SICA</div></div>
         </div>
         <div class="about-text">
-          <p><strong style="color:#F5A623">Foko Games</strong> es un estudio indie espa&ntilde;ol que desarrolla videojuegos en distintas plataformas: desde homebrew para <strong style="color:#FF2D2D">NES</strong> y <strong style="color:#F5A623">ZX Spectrum</strong> en ensamblador hasta juegos m&oacute;viles para <strong style="color:#00D4FF">Android</strong> y t&iacute;tulos de escritorio con <strong style="color:#A855F7">Unity</strong>.</p>
+          <p><strong style="color:#F5A623">Foko Games</strong> es un estudio indie espa&ntilde;ol que desarrolla videojuegos en distintas plataformas: desde homebrew para <strong style="color:#FF2D2D">NES</strong>, <strong style="color:#F5A623">ZX Spectrum</strong> y <strong style="color:#FF7A00">DOS</strong> en ensamblador hasta juegos m&oacute;viles para <strong style="color:#00D4FF">Android</strong> y t&iacute;tulos de escritorio con <strong style="color:#A855F7">Unity</strong>.</p>
           <p>Con <strong style="color:#00FF88">NES Game Studio</strong> y <strong style="color:#F5A623">ZXS-Maker</strong> llevamos esa pasi&oacute;n un paso m&aacute;s all&aacute;: editores que permiten a cualquiera crear su propio juego real de NES o ZX Spectrum desde el navegador, sin escribir c&oacute;digo.</p>
           <p>Bajo <strong style="color:#00FF88">Foko Soft</strong> desarrollamos herramientas y proyectos personales como <strong style="color:#00FF88">ImpreContaAR</strong> y experimentos de IoT, aplicando la misma l&oacute;gica de resolver problemas reales con software.</p>
           <p>Y como <strong style="color:#A855F7">F0K0</strong>, exploramos la m&uacute;sica: chiptune, producci&oacute;n original y experimentos con IA, disponible en Spotify, Suno y YouTube.</p>
@@ -415,25 +471,234 @@
   </section>
 
   <script>
+    /* Cursor pixel: sigue al puntero 1:1 (sin suavizado) y solo dibuja cuando el raton se mueve. */
     (function(){
       var c=document.getElementById('cursor');
-      if(!c||window.matchMedia('(pointer:coarse)').matches)return;
-      var mx=0,my=0,cx=0,cy=0;
-      document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});
-      document.addEventListener('mouseover',function(e){if(e.target.closest('a,button,.game-card,.hub-card'))c.classList.add('hover')});
-      document.addEventListener('mouseout',function(e){if(e.target.closest('a,button,.game-card,.hub-card'))c.classList.remove('hover')});
-      function anim(){cx+=(mx-cx)*.15;cy+=(my-cy)*.15;var s=c.classList.contains('hover')?8:6;c.style.transform='translate('+(cx-s)+'px,'+(cy-s)+'px)';requestAnimationFrame(anim);}
-      anim();
+      if(!c||!window.matchMedia('(pointer:fine)').matches)return;
+      document.documentElement.classList.add('pixel-cursor-on');
+      var HOVER='a,button,.game-card,.hub-card',x=0,y=0,queued=false,shown=false;
+      function draw(){queued=false;c.style.transform='translate3d('+x+'px,'+y+'px,0)';}
+      document.addEventListener('mousemove',function(e){
+        x=e.clientX;y=e.clientY;
+        if(!shown){shown=true;c.classList.add('active');}
+        if(!queued){queued=true;requestAnimationFrame(draw);}
+      },{passive:true});
+      /* mouseover ya dispara solo al cambiar de elemento; un unico toggle evita el parpadeo del par over/out */
+      document.addEventListener('mouseover',function(e){
+        var t=e.target;
+        var over=!!(t&&t.closest&&t.closest(HOVER));
+        c.classList.toggle('hover',over);
+        c.classList.toggle('aim',!over&&!!(t&&t.closest&&t.closest('#hero')));
+      },{passive:true});
+      document.addEventListener('mouseout',function(e){
+        if(!e.relatedTarget){shown=false;c.classList.remove('active');}
+      },{passive:true});
     })();
     (function(){
-      var b=document.getElementById('scrollTop');
-      window.addEventListener('scroll',function(){b.classList.toggle('visible',window.scrollY>500)},{passive:true});
+      var b=document.getElementById('scrollTop'),queued=false,on=false;
+      window.addEventListener('scroll',function(){
+        if(queued)return;queued=true;
+        requestAnimationFrame(function(){
+          queued=false;
+          var v=window.scrollY>500;
+          if(v!==on){on=v;b.classList.toggle('visible',v);}
+        });
+      },{passive:true});
     })();
     (function(){
       var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
-      document.querySelectorAll('.game-card').forEach(function(el,i){el.style.transitionDelay=(i*.1)+'s';o.observe(el)});
-      document.querySelectorAll('.stat-item').forEach(function(el,i){el.style.transitionDelay=(i*.1)+'s';o.observe(el)});
+      function stagger(sel,max){document.querySelectorAll(sel).forEach(function(el,i){el.style.transitionDelay=Math.min(i*.08,max)+'s';o.observe(el)});}
+      stagger('.game-card',.4);
+      stagger('.stat-item',.3);
       document.querySelectorAll('.about-text').forEach(function(el){o.observe(el)});
+    })();
+    /* ---------------------------------------------------------------
+       Starfield + naves en un unico canvas (reemplaza los box-shadow
+       animados por CSS). Corre solo mientras el hero esta en pantalla.
+       --------------------------------------------------------------- */
+    (function(){
+      var cv=document.getElementById('heroCanvas'),hero=document.getElementById('hero');
+      if(!cv||!hero||!cv.getContext)return;
+      var ctx=cv.getContext('2d');
+      var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+      var SPRITES=[
+        {pts:100,px:4,minSpd:34,maxSpd:58,rows:[
+          '..#.....#..','...#...#...','..#######..','.##.###.##.',
+          '###########','#.#######.#','#.#.....#.#','...##.##...']},
+        {pts:250,px:4,minSpd:78,maxSpd:120,rows:[
+          '...##...','..####..','.##..##.','##.##.##','#.#..#.#','..#..#..']},
+        {pts:50,px:4,minSpd:18,maxSpd:32,rows:[
+          '....####....','...######...','..##.##.##..','.###.##.###.',
+          '##.######.##','#.#......#.#','...#....#...']}
+      ];
+      var COLORS=['#FF2D2D','#00D4FF','#00FF88','#F5A623','#A855F7','#EC4899'];
+
+      var dpr=1,W=0,H=0,baked=[],stars=[],ships=[],parts=[],shots=[],pops=[];
+      var score=0,hi=0,running=false,raf=0,last=0,nextSpawn=0,fired=false;
+      var elScore=document.getElementById('hudScore'),
+          elHi=document.getElementById('hudHi'),
+          elHint=document.getElementById('hudHint');
+
+      try{hi=parseInt(localStorage.getItem('fokoHiScore'),10)||0}catch(e){hi=0}
+      if(elHi)elHi.textContent=hi;
+
+      /* Los sprites se pre-renderizan una vez por tipo y color: en el bucle
+         cada nave es un drawImage en vez de ~70 fillRect. */
+      function bake(){
+        baked=SPRITES.map(function(sp){
+          return COLORS.map(function(col){
+            var w=sp.rows[0].length,h=sp.rows.length,px=sp.px*dpr;
+            var c=document.createElement('canvas');
+            c.width=w*px;c.height=h*px;
+            var g=c.getContext('2d');
+            g.fillStyle=col;
+            for(var y=0;y<h;y++)for(var x=0;x<w;x++)
+              if(sp.rows[y].charAt(x)==='#')g.fillRect(x*px,y*px,px,px);
+            return c;
+          });
+        });
+      }
+
+      function seedStars(){
+        stars=[];
+        var n=Math.min(140,Math.round(W*H/9000));
+        for(var i=0;i<n;i++){
+          var layer=i%3;
+          stars.push({x:Math.random()*W,y:Math.random()*H,
+                      s:layer===1?2:1,spd:[6,11,17][layer],a:[.4,.7,1][layer]});
+        }
+      }
+
+      function resize(){
+        var r=hero.getBoundingClientRect();
+        W=Math.max(1,r.width);H=Math.max(1,r.height);
+        dpr=Math.min(window.devicePixelRatio||1,2);
+        cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+        ctx.imageSmoothingEnabled=false;
+        bake();seedStars();ships=[];
+        if(!running)frame(0,true);
+      }
+
+      function spawn(){
+        var ti=Math.random()<.18?1:(Math.random()<.28?2:0);
+        var sp=SPRITES[ti];
+        var w=sp.rows[0].length*sp.px,h=sp.rows.length*sp.px;
+        var dir=Math.random()<.5?1:-1;
+        var y=24+Math.random()*Math.max(24,H-h-70);
+        ships.push({t:ti,c:(Math.random()*COLORS.length)|0,w:w,h:h,dir:dir,
+          x:dir>0?-w-10:W+10,y:y,base:y,
+          spd:sp.minSpd+Math.random()*(sp.maxSpd-sp.minSpd),
+          amp:6+Math.random()*16,ph:Math.random()*6.28});
+      }
+
+      function boom(x,y,col,n){
+        for(var i=0;i<n;i++){
+          var a=Math.random()*6.28,v=20+Math.random()*90;
+          parts.push({x:x,y:y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,
+                      life:.45+Math.random()*.35,max:.8,c:col});
+        }
+        if(parts.length>140)parts.splice(0,parts.length-140);
+      }
+
+      function addScore(n,x,y){
+        score+=n;
+        if(elScore)elScore.textContent=score;
+        if(score>hi){
+          hi=score;
+          if(elHi)elHi.textContent=hi;
+          try{localStorage.setItem('fokoHiScore',String(hi))}catch(e){}
+        }
+        pops.push({x:x,y:y,txt:'+'+n,life:.9});
+      }
+
+      function shoot(cx,cy){
+        if(!fired){fired=true;if(elHint)elHint.classList.add('off');}
+        shots.push({x:cx,y:cy,life:.16});
+        for(var i=ships.length-1;i>=0;i--){
+          var s=ships[i],pad=10;
+          if(cx>=s.x-pad&&cx<=s.x+s.w+pad&&cy>=s.y-pad&&cy<=s.y+s.h+pad){
+            boom(s.x+s.w/2,s.y+s.h/2,COLORS[s.c],14);
+            addScore(SPRITES[s.t].pts,s.x+s.w/2,s.y);
+            ships.splice(i,1);
+            return;
+          }
+        }
+      }
+
+      function frame(ts,once){
+        if(!once)raf=requestAnimationFrame(frame);
+        var dt=once?0:(last?Math.min((ts-last)/1000,.05):.016);
+        last=ts;
+
+        ctx.clearRect(0,0,W,H);
+        var i,s;
+
+        for(i=0;i<stars.length;i++){
+          s=stars[i];
+          s.y-=s.spd*dt;
+          if(s.y<-2){s.y=H+2;s.x=Math.random()*W}
+          ctx.globalAlpha=s.a;ctx.fillStyle='#fff';
+          ctx.fillRect(s.x|0,s.y|0,s.s,s.s);
+        }
+        ctx.globalAlpha=1;
+
+        if(!reduce){
+          nextSpawn-=dt;
+          if(nextSpawn<=0&&ships.length<7){spawn();nextSpawn=.9+Math.random()*1.8}
+          for(i=ships.length-1;i>=0;i--){
+            s=ships[i];
+            s.x+=s.spd*s.dir*dt;s.ph+=dt*1.6;
+            s.y=s.base+Math.sin(s.ph)*s.amp;
+            if(s.dir>0?s.x>W+20:s.x+s.w<-20){ships.splice(i,1);continue}
+            ctx.drawImage(baked[s.t][s.c],s.x|0,s.y|0,s.w,s.h);
+          }
+        }
+
+        for(i=shots.length-1;i>=0;i--){
+          var sh=shots[i];sh.life-=dt;
+          if(sh.life<=0){shots.splice(i,1);continue}
+          ctx.globalAlpha=sh.life/.16;
+          ctx.strokeStyle='#00FF88';ctx.lineWidth=2;
+          ctx.beginPath();ctx.moveTo(W/2,H);ctx.lineTo(sh.x,sh.y);ctx.stroke();
+        }
+
+        for(i=parts.length-1;i>=0;i--){
+          var pt=parts[i];pt.life-=dt;
+          if(pt.life<=0){parts.splice(i,1);continue}
+          pt.x+=pt.vx*dt;pt.y+=pt.vy*dt;pt.vy+=60*dt;
+          ctx.globalAlpha=Math.max(0,pt.life/pt.max);
+          ctx.fillStyle=pt.c;ctx.fillRect(pt.x|0,pt.y|0,3,3);
+        }
+
+        ctx.font="10px 'Press Start 2P',monospace";ctx.textAlign='center';
+        for(i=pops.length-1;i>=0;i--){
+          var po=pops[i];po.life-=dt;
+          if(po.life<=0){pops.splice(i,1);continue}
+          po.y-=26*dt;
+          ctx.globalAlpha=Math.min(1,po.life);
+          ctx.fillStyle='#F5A623';ctx.fillText(po.txt,po.x,po.y);
+        }
+        ctx.globalAlpha=1;
+      }
+
+      function start(){if(running)return;running=true;last=0;raf=requestAnimationFrame(frame)}
+      function stop(){if(!running)return;running=false;cancelAnimationFrame(raf)}
+
+      /* Los clics sobre links, botones y hub-cards siguen navegando normal. */
+      hero.addEventListener('click',function(e){
+        if(e.target.closest('a,button'))return;
+        var r=cv.getBoundingClientRect();
+        shoot(e.clientX-r.left,e.clientY-r.top);
+      });
+
+      var rt;
+      window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(resize,150)},{passive:true});
+      document.addEventListener('visibilitychange',function(){document.hidden?stop():start()});
+
+      resize();
+      new IntersectionObserver(function(en){en[0].isIntersecting?start():stop()},{threshold:0}).observe(hero);
     })();
   </script>
 </body>
