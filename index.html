@@ -38,6 +38,9 @@
     .hud-hi{color:#8A8A8A;font-size:8px}
     .hud-hint{color:#4A4A4A;font-size:7px;letter-spacing:1px;margin-top:6px;transition:opacity .6s ease}
     .hud-hint.off{opacity:0}
+    .hud-snd{pointer-events:auto;margin-top:10px;background:none;border:1px solid #333;border-radius:2px;color:#8A8A8A;font-size:11px;line-height:1;padding:5px 7px;transition:border-color .2s,color .2s,opacity .2s}
+    .hud-snd:hover{border-color:#F5A623;color:#F5A623}
+    .hud-snd.off{opacity:.45}
     @media(max-width:600px){.hud{top:58px;right:12px;font-size:8px}}
     /* Mira sobre zona disparable del hero */
     .pixel-cursor.aim{background:#00FF88;box-shadow:0 0 0 1px #050505,0 0 0 5px rgba(0,255,136,.35)}
@@ -165,10 +168,11 @@
     <div class="starfield">
       <canvas id="heroCanvas" aria-hidden="true"></canvas>
     </div>
-    <div class="hud" id="hud" aria-hidden="true">
-      <div class="hud-score">SCORE <span id="hudScore">0</span></div>
-      <div class="hud-hi">HI <span id="hudHi">0</span></div>
-      <div class="hud-hint" id="hudHint">CLIC PARA DISPARAR</div>
+    <div class="hud" id="hud">
+      <div class="hud-score" aria-hidden="true">SCORE <span id="hudScore">0</span></div>
+      <div class="hud-hi" aria-hidden="true">HI <span id="hudHi">0</span></div>
+      <div class="hud-hint" id="hudHint" aria-hidden="true">CLIC PARA DISPARAR</div>
+      <button class="hud-snd" id="sndToggle" type="button" aria-pressed="false" aria-label="Silenciar los efectos de sonido">&#128266;</button>
     </div>
     <div class="hero-content">
       <p class="hero-tagline">GAMES &middot; SOFT &middot; MUSIC</p>
@@ -728,13 +732,71 @@
         pops.push({x:x,y:y,txt:'+'+n,life:.9});
       }
 
+      /* Efectos de sonido sintetizados con Web Audio: ni un fichero que descargar,
+         y el timbre cuadrado pega con el resto del sitio. El AudioContext se crea
+         en el primer disparo porque el navegador bloquea el audio sin gesto previo. */
+      var Snd=(function(){
+        var ctx=null,master=null,on=true;
+        try{on=localStorage.getItem('fokoSonido')!=='0'}catch(e){}
+        function init(){
+          if(ctx)return ctx;
+          var AC=window.AudioContext||window.webkitAudioContext;
+          if(!AC)return null;
+          try{
+            ctx=new AC();
+            master=ctx.createGain();
+            master.gain.value=.16;
+            master.connect(ctx.destination);
+          }catch(e){ctx=null}
+          return ctx;
+        }
+        /* Una nota: envolvente corta para que suene a blip, no a pitido sostenido. */
+        function nota(f0,f1,retardo,dur,vol,tipo){
+          var c=init();if(!c)return;
+          if(c.state==='suspended')c.resume();
+          var t=c.currentTime+retardo;
+          var osc=c.createOscillator(),g=c.createGain();
+          osc.type=tipo||'square';
+          osc.frequency.setValueAtTime(f0,t);
+          if(f1!==f0)osc.frequency.exponentialRampToValueAtTime(Math.max(20,f1),t+dur);
+          g.gain.setValueAtTime(.0001,t);
+          g.gain.exponentialRampToValueAtTime(vol,t+.008);
+          g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+          osc.connect(g);g.connect(master);
+          osc.start(t);osc.stop(t+dur+.02);
+          osc.onended=function(){try{osc.disconnect();g.disconnect()}catch(e){}};
+        }
+        return {
+          activo:function(){return on},
+          alternar:function(){
+            on=!on;
+            try{localStorage.setItem('fokoSonido',on?'1':'0')}catch(e){}
+            if(on)nota(880,880,0,.06,.5);
+            return on;
+          },
+          /* Disparo: barrido descendente rapido, el laser de toda la vida. */
+          disparo:function(){if(on)nota(900,120,0,.09,.5)},
+          /* Impacto: arpegio ascendente de tres notas; cuanto mas vale la nave,
+             mas agudo empieza, asi se oye que cayo una de las buenas. */
+          impacto:function(pts){
+            if(!on)return;
+            var base=pts>=250?659:(pts>=100?523:415);
+            nota(base,base,0,.07,.42);
+            nota(base*1.26,base*1.26,.045,.07,.42);
+            nota(base*1.5,base*1.5,.09,.11,.42);
+          }
+        };
+      })();
+
       function shoot(cx,cy){
         if(!fired){fired=true;if(elHint)elHint.classList.add('off');}
+        Snd.disparo();
         shots.push({x:cx,y:cy,life:.16});
         for(var i=ships.length-1;i>=0;i--){
           var s=ships[i],pad=10;
           if(cx>=s.x-pad&&cx<=s.x+s.w+pad&&cy>=s.y-pad&&cy<=s.y+s.h+pad){
             boom(s.x+s.w/2,s.y+s.h/2,COLORS[s.c],14);
+            Snd.impacto(SPRITES[s.t].pts);
             addScore(SPRITES[s.t].pts,s.x+s.w/2,s.y);
             ships.splice(i,1);
             return;
@@ -807,6 +869,19 @@
         var r=cv.getBoundingClientRect();
         shoot(e.clientX-r.left,e.clientY-r.top);
       });
+
+      var btn=document.getElementById('sndToggle');
+      if(btn){
+        function pintarBtn(){
+          var on=Snd.activo();
+          btn.innerHTML=on?'&#128266;':'&#128263;';
+          btn.classList.toggle('off',!on);
+          btn.setAttribute('aria-pressed',on?'false':'true');
+          btn.setAttribute('aria-label',on?'Silenciar los efectos de sonido':'Activar los efectos de sonido');
+        }
+        pintarBtn();
+        btn.addEventListener('click',function(e){e.stopPropagation();Snd.alternar();pintarBtn()});
+      }
 
       var rt;
       window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(resize,150)},{passive:true});
