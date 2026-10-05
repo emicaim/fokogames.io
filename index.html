@@ -51,7 +51,7 @@
     .site-nav{position:fixed;top:0;left:0;width:100%;z-index:200;display:flex;justify-content:center;gap:22px;padding:14px 20px;background:rgba(5,5,5,.94);border-bottom:1px solid #1A1A1A;flex-wrap:wrap}
     .site-nav a{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8A8A8A;transition:color .2s}
     .site-nav a:hover{color:#F5A623}
-    .hub-grid{position:relative;z-index:10;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1000px;width:100%;margin-top:48px;opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease 1.1s forwards}
+    .hub-grid{position:relative;z-index:10;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;max-width:1120px;width:100%;margin-top:48px;opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease 1.1s forwards}
     @media(max-width:900px){.hub-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:480px){.hub-grid{grid-template-columns:1fr}}
     .hub-card{background:#0A0A0F;border:1px solid #1A1A1A;border-left:3px solid var(--accent);border-radius:4px;padding:20px 16px;text-align:left;transition:transform .25s,box-shadow .25s,border-color .25s}
@@ -85,6 +85,16 @@
     .game-btn svg{width:10px;height:10px}
     .press-badge{display:block;font-family:'Space Mono',monospace;font-size:9px;color:#8A8A8A;margin-top:10px}
     .press-badge a{color:#00FF88;text-decoration:underline}
+    .neutro-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;margin-bottom:38px}
+    .neutro-logo{width:220px;max-width:70%;height:auto}
+    .neutro-lead{max-width:780px;font-family:'Inter',sans-serif;font-size:15px;line-height:1.85;color:#C9C9C9}
+    .neutro-lead strong{color:#F0F0F0;font-weight:600}
+    .neutro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:20px;margin-bottom:34px}
+    .neutro-card{background:#0A0A0F;border:1px solid #1A1A1A;border-left:3px solid #7C5CFF;border-radius:4px;padding:20px}
+    .neutro-card h3{font-family:'Press Start 2P',monospace;font-size:10px;color:#7C5CFF;margin-bottom:12px;line-height:1.7}
+    .neutro-card p{font-family:'Inter',sans-serif;font-size:14px;line-height:1.75;color:#8A8A8A}
+    .neutro-cta{text-align:center}
+    .neutro-note{font-family:'Space Mono',monospace;font-size:10px;color:#4A4A4A;letter-spacing:1px;margin-top:18px}
     .soft-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
     .soft-card{background:#0A0A0F;border:1px solid #1A1A1A;border-left:3px solid #00FF88;border-radius:4px;padding:24px}
     .soft-card h3{font-family:'Press Start 2P',monospace;font-size:11px;color:#00FF88;margin-bottom:10px}
@@ -144,6 +154,7 @@
   <nav class="site-nav">
     <a href="#games">Games</a>
     <a href="#mobile">Mobile</a>
+    <a href="#neutro">Neutro</a>
     <a href="#foko-soft">Foko Soft</a>
     <a href="#music">F0K0 Music</a>
     <a href="#about">Nosotros</a>
@@ -162,16 +173,20 @@
     <div class="hero-content">
       <p class="hero-tagline">GAMES &middot; SOFT &middot; MUSIC</p>
       <h1 class="hero-title">FOKO</h1>
-      <p class="hero-subtitle">NES &middot; ZX Spectrum &middot; DOS &middot; Unity &middot; Android &middot; Pixel Art &middot; Chiptune</p>
+      <p class="hero-subtitle">NES &middot; ZX Spectrum &middot; Atari &middot; DOS &middot; Unity &middot; IA &middot; Pixel Art &middot; Chiptune</p>
     </div>
     <div class="hub-grid">
       <a href="#games" class="hub-card" style="--accent:#FF2D2D;--glow:rgba(255,45,45,.3)">
         <h3>🎮 GAMES</h3>
-        <p>NES, ZX Spectrum, DOS, Unity y editores propios</p>
+        <p>NES, ZX Spectrum, Atari 2600, DOS y editores propios</p>
       </a>
       <a href="#mobile" class="hub-card" style="--accent:#00D4FF;--glow:rgba(0,212,255,.3)">
         <h3>📱 MOBILE</h3>
         <p>Nuestros juegos en Android</p>
+      </a>
+      <a href="#neutro" class="hub-card" style="--accent:#7C5CFF;--glow:rgba(124,92,255,.3)">
+        <h3>&#129504; NEUTRO</h3>
+        <p>Un cerebro que aprende a jugar solo</p>
       </a>
       <a href="#foko-soft" class="hub-card" style="--accent:#00FF88;--glow:rgba(0,255,136,.3)">
         <h3>🛠️ FOKO SOFT</h3>
@@ -189,20 +204,33 @@
       <div class="section-header">
         <h2 class="section-title">FOKO GAMES</h2>
         <div class="section-line"></div>
-        <p class="section-subtitle">JUEGOS Y HERRAMIENTAS PARA NES, ZX SPECTRUM, DOS, UNITY Y ANDROID</p>
+        <p class="section-subtitle">JUEGOS Y HERRAMIENTAS PARA NES, ZX SPECTRUM, ATARI 2600, DOS, UNITY Y ANDROID</p>
       </div>
       <div class="games-grid">
-        <article class="game-card featured" style="--accent:#C9B99B;--accent-glow:rgba(201,185,155,0.3)" data-delay="0">
+        <article class="game-card featured" style="--accent:#C4213A;--accent-glow:rgba(196,33,58,0.35)" data-delay="0">
+          <div class="game-image"><img class="top" src="raid-cover.jpg" alt="Raid Attack" loading="lazy" decoding="async"></div>
+          <div class="game-body">
+            <div class="game-title-row">
+              <h3 class="game-title">RAID ATTACK</h3>
+              <span class="game-badge" style="background:#C4213A;color:#fff">NUEVO</span>
+            </div>
+            <p class="game-genre" style="color:#C4213A">SHOOTER &middot; ATARI 2600</p>
+            <p class="game-desc">Shooter de scroll vertical para Atari 2600, homenaje a River Raid: pilot&aacute;s un cohete por un ca&ntilde;&oacute;n sin fin esquivando paredes y administrando energ&iacute;a. Disparo cargado, combo hasta 4x y un turbo que duplica bajas a toda velocidad pero te deja sin margen. El ca&ntilde;&oacute;n es siempre el mismo, as&iacute; que cada intento ense&ntilde;a algo. ROM de 4K en ensamblador 6502.</p>
+            <p class="game-platforms">ATARI 2600 &middot; EMULADOR O CARTUCHO REAL</p>
+            <a href="https://foko-games.itch.io/raid-attack" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#C4213A;color:#fff">DESCARGAR</a>
+          </div>
+        </article>
+        <article class="game-card featured" style="--accent:#C9B99B;--accent-glow:rgba(201,185,155,0.3)" data-delay="1">
           <div class="game-image"><img src="her-cover.jpg" alt="HER" loading="lazy" decoding="async"></div>
           <div class="game-body">
             <div class="game-title-row">
               <h3 class="game-title">HER</h3>
-              <span class="game-badge" style="background:#C9B99B">DEMO</span>
+              <span class="game-badge" style="background:#C9B99B">v1.0</span>
             </div>
-            <p class="game-genre" style="color:#C9B99B">PLATAFORMAS &middot; AVENTURA</p>
-            <p class="game-desc">Una torre, una espada y un castillo que a veces olvida lo que es. Plataformas con secretos donde no todo es lo que parece: ya hay 10 de los 20 niveles jugables en el navegador. Tres dificultades, y en la m&aacute;s dura cada sala corre contra reloj en vez de quitarte vida.</p>
+            <p class="game-genre" style="color:#C9B99B">PLATAFORMAS &middot; LO JUEGA UNA IA</p>
+            <p class="game-desc">Una torre, una espada y un castillo que a veces olvida serlo. Veinte niveles y un final, con un giro: el modo CANON no lo jug&aacute;s vos, lo juega <strong>Neutro</strong> &mdash; nuestro cerebro de neuronas de concepto &mdash; y lo ves aprender a fuerza de error con su proceso de decisi&oacute;n a la vista. Tambi&eacute;n hay modo humano, con las mismas mec&aacute;nicas.</p>
             <p class="game-platforms">BROWSER &middot; UNITY &middot; ES / EN</p>
-            <a href="https://foko-games.itch.io/her" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#C9B99B;color:#000">JUGAR DEMO</a>
+            <a href="https://foko-games.itch.io/her" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#C9B99B;color:#000">JUGAR</a>
           </div>
         </article>
         <article class="game-card featured" style="--accent:#3B82F6;--accent-glow:rgba(59,130,246,0.35)" data-delay="1">
@@ -415,6 +443,42 @@
     </div>
   </section>
 
+  <section id="neutro" style="background:linear-gradient(to bottom,#050505,#0A0A0F)">
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title" style="color:#7C5CFF">NEUTRO</h2>
+        <div class="section-line" style="background:linear-gradient(to right,#7C5CFF,#2DE2D5)"></div>
+        <p class="section-subtitle">UN CEREBRO QUE APRENDE A JUGAR</p>
+      </div>
+      <div class="neutro-head">
+        <img class="neutro-logo" src="neutro-logo.png" alt="Neutro" loading="lazy" decoding="async">
+        <p class="neutro-lead">Un cerebro de <strong>neuronas de concepto</strong>, en la l&iacute;nea del trabajo de Rodrigo Quian Quiroga, que aprende con muy poca memoria y muy poco c&oacute;mputo: reduce lo que ve a unas pocas ideas &mdash;peligro, obst&aacute;culo, vac&iacute;o&mdash;, olvida el resto y aprende de cada fracaso. Un inventario abierto separa qu&eacute; conducta sale sola del cerebro y qu&eacute; est&aacute; escrita a mano, para ir quitando lo segundo y medir si vuelve a emerger.</p>
+      </div>
+      <div class="neutro-grid">
+        <div class="neutro-card">
+          <h3>SE PASA EL 1-1 DESDE CERO</h3>
+          <p>Juega Super Mario Bros real, emulado, y completa el Mundo 1-1 partiendo de nada con unos pocos KB de memoria. Tambi&eacute;n se gana el 3-1, 4-1, 5-1, 6-1 y 7-1.</p>
+        </div>
+        <div class="neutro-card">
+          <h3>UN N&Uacute;CLEO,<br>CUATRO LENGUAJES</h3>
+          <p>El mismo cerebro en Python, C#, C++ y JavaScript, obligados a decidir exactamente igual: vectores de prueba cruzados verifican que ninguna implementaci&oacute;n se desv&iacute;e de las dem&aacute;s.</p>
+        </div>
+        <div class="neutro-card">
+          <h3>NEUTRO MINDS</h3>
+          <p>Mentes con hambre, apego, miedo y sue&ntilde;o que exploran un mundo, inventan palabras y fundan aldeas. Una partida guardada va ya por el a&ntilde;o 308.</p>
+        </div>
+        <div class="neutro-card">
+          <h3>EL DESTINO:<br>UNA PLACA</h3>
+          <p>El objetivo final es que se pase el juego entero corriendo en un ESP32-S3, sin PC detr&aacute;s. Cabe justamente porque casi no recuerda nada.</p>
+        </div>
+      </div>
+      <div class="neutro-cta">
+        <a href="https://foko-games.itch.io/her" target="_blank" rel="noopener noreferrer" class="game-btn" style="background:#7C5CFF;color:#fff">VER A NEUTRO JUGAR EN HER</a>
+        <p class="neutro-note">INVESTIGACI&Oacute;N EN CURSO &middot; EL C&Oacute;DIGO TODAV&Iacute;A NO ES P&Uacute;BLICO</p>
+      </div>
+    </div>
+  </section>
+
   <section id="foko-soft" style="background:#050505">
     <div class="section">
       <div class="section-header">
@@ -476,7 +540,7 @@
       </div>
       <div class="about-grid">
         <div class="stats-grid">
-          <div class="stat-item"><div class="stat-value" style="color:#FF2D2D">16+</div><div class="stat-label">JUEGOS</div></div>
+          <div class="stat-item"><div class="stat-value" style="color:#FF2D2D">17+</div><div class="stat-label">JUEGOS</div></div>
           <div class="stat-item"><div class="stat-value" style="color:#00D4FF">2015</div><div class="stat-label">DESDE</div></div>
           <div class="stat-item"><div class="stat-value" style="color:#00FF88">SOFT</div><div class="stat-label">FOKO SOFT</div></div>
           <div class="stat-item"><div class="stat-value" style="color:#A855F7">F0K0</div><div class="stat-label">M&Uacute;SICA</div></div>
